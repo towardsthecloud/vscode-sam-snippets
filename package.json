@@ -1,7 +1,7 @@
 {
   "name": "sam-snippets",
-  "displayName": "AWS SAM Snippets",
-  "description": "This extension adds snippets for all the AWS SAM resources into Visual Studio Code.",
+  "displayName": "SAM Snippets",
+  "description": "Adds snippets for all the AWS Serverless Application Model (SAM) resources in VS Code.",
   "author": "Danny Steenman",
   "version": "1.0.0",
   "publisher": "dannysteenman",

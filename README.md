@@ -1,0 +1,87 @@
+# AWS Serverless Application Model (SAM) Snippets for VS Code
+
+[![Version](https://img.shields.io/visual-studio-marketplace/v/dannysteenman.sam-snippets 'Current Release')](https://marketplace.visualstudio.com/items?itemName=dannysteenman.sam-snippets)
+[![Installs](https://img.shields.io/visual-studio-marketplace/i/dannysteenman.sam-snippets 'Currently Installed')](https://marketplace.visualstudio.com/items?itemName=dannysteenman.sam-snippets)
+[![Rating](https://img.shields.io/visual-studio-marketplace/stars/dannysteenman.sam-snippets)](https://marketplace.visualstudio.com/items?itemName=dannysteenman.sam-snippets)
+
+This extension adds YAML snippets for **all** [AWS SAM resources](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-resources-and-properties.html) into Visual Studio Code.
+
+> [!TIP]
+> If you're looking for expertise to elevate your cloud infrastructure, then don't hesitate to get in [touch with me](https://towardsthecloud.com/contact)!
+>
+> <details><summary>📚 <strong>Discover more about us</strong></summary>
+>
+> <br/>
+>
+> Towards the Cloud is a one-person agency with over 9 years of extensive hands-on experience in architecting and building highly scalable distributed systems on AWS Cloud using Infrastructure as Code for startups and enterprises.
+>
+> *Maximize your development speed by harnessing our expertise in crafting high-performance Cloud infrastructures.*
+>
+> #### Why Choose Towards the Cloud?
+>
+> - **Expertise in AWS CDK**: Leverage the full power of AWS Cloud Development Kit (AWS CDK) with our deep expertise. We architect and build infrastructure as code (IaC) solutions that are maintainable, scalable, and fully automated.
+> - **Tailored Solutions**: Your business is unique, and so are your cloud needs. We provide personalized consultations and solutions tailored to perfectly align with your project requirements and business goals.
+> - **Cost-Effective and Efficient**: Benefit from our streamlined processes and deep AWS knowledge to optimize costs without compromising on performance or security.
+> - **One-on-One Attention**: As a one-person agency, Towards the Cloud guarantees you receive dedicated support and expertise directly from an AWS Cloud Engineer. This ensures high-quality deliverables and swift decision-making.<br/>
+> - **Seamless CI/CD**: Empower your team to manage infrastructure changes confidently and efficiently through Pull Requests, leveraging the full power of GitHub Actions.
+>
+> <a href="https://towardsthecloud.com/contact"><img alt="Schedule introduction call" src="https://img.shields.io/badge/schedule%20introduction%20call-success.svg?style=for-the-badge"/></a>
+> </details>
+
+---
+
+## Features
+
+1. Adds support for the following SAM resource types:
+
+```YAML
+    AWS::Serverless::Api
+    AWS::Serverless::Application
+    AWS::Serverless::Connector
+    AWS::Serverless::Function
+    AWS::Serverless::GraphQLApi
+    AWS::Serverless::HttpApi
+    AWS::Serverless::LayerVersion
+    AWS::Serverless::SimpleTable
+    AWS::Serverless::StateMachine
+```
+
+2. Includes intrinsic functions, conditions, and a variety of parameter types.
+3. Utilizes placeholders for quick navigation within the properties of each resource.
+4. Provides documentation links for each resource.
+5. Available on the [Open VSX Registry](https://open-vsx.org/extension/dannysteenman/sam-snippets) for Gitpod support.
+
+## Usage
+
+* **Step 1.** Install this extension
+* **Step 2.** create a `.yml` file to start working on your AWS SAM project.
+* **Step 3.** Check in the bottom right-hand corner of the VS Code editor that the file type is listed as "YAML".
+* **Step 4.** To start with the basic template structure, type `sam` to get the YAML formatted template fragment.
+* **Step 5.** Start adding resources in the resource section by using their prefix name e.g. ```serverless-api``` equals resource type ```AWS::Serverless::Api```
+
+> **Note:** Once you start typing a prefix (explained in step 5), the corresponding snippet will show up in the dropdown menu. If this doesn't happen automatically, press `ctrl + space` to invoke IntelliSense and search for the prefix of the resource type that you want to add (as listed in step 5).
+
+---
+## AWS CloudFormation Snippets for VS Code
+
+If you use CloudFormation to create your infrastructure as Code, then have a look at [this VS Code extension](https://marketplace.visualstudio.com/items?itemName=dannysteenman.cloudformation-yaml-snippets) I published that adds JSON and YAML snippets for all the AWS CloudFormation resources into Visual Studio Code.
+
+---
+## Support
+
+If you have a feature request or an issue, please let me know on [Github](https://github.com/dannysteenman/vscode-sam-snippets/issues)
+
+## Contributing
+
+If you want to add more snippets, your contribution is more than welcome!
+
+Review the [Contributing Guidelines](https://github.com/dannysteenman/vscode-sam-snippets/blob/main/.github/CONTRIBUTING.md).
+
+---
+## Author
+
+**[Danny Steenman](https://github.com/dannysteenman)**
+
+<p align="left">
+  <a href="https://twitter.com/dannysteenman"><img src="https://img.shields.io/twitter/follow/dannysteenman?label=%40dannysteenman&style=social"></a>
+</p>
