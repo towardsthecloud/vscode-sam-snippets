@@ -1,5 +1,6 @@
 *.vsix
 .mypy_cache
+.python-version
 
 # Ignore everything in the test folder
 /test/*
