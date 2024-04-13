@@ -2,6 +2,11 @@ Changelog
 =========
 
 
+1.2.0 (2024-04-13)
+------------------
+- Feat: improve readme. [Danny Steenman]
+
+
 1.1.0 (2024-04-13)
 ------------------
 - Feat: add README.md and github publish workflow. [Danny Steenman]
