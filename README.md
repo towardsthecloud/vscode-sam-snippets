@@ -1,10 +1,10 @@
-# AWS Serverless Application Model (SAM) Snippets for VS Code
+# AWS SAM Snippets for VS Code
 
 [![Version](https://img.shields.io/visual-studio-marketplace/v/dannysteenman.sam-snippets 'Current Release')](https://marketplace.visualstudio.com/items?itemName=dannysteenman.sam-snippets)
 [![Installs](https://img.shields.io/visual-studio-marketplace/i/dannysteenman.sam-snippets 'Currently Installed')](https://marketplace.visualstudio.com/items?itemName=dannysteenman.sam-snippets)
 [![Rating](https://img.shields.io/visual-studio-marketplace/stars/dannysteenman.sam-snippets)](https://marketplace.visualstudio.com/items?itemName=dannysteenman.sam-snippets)
 
-This extension adds YAML snippets for **all** [AWS SAM resources](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-resources-and-properties.html) into Visual Studio Code.
+This extension adds YAML snippets for **all** [AWS Serverless Application Model (SAM) resources](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-resources-and-properties.html) into Visual Studio Code.
 
 > [!TIP]
 > If you're looking for expertise to elevate your cloud infrastructure, then don't hesitate to get in [touch with me](https://towardsthecloud.com/contact)!
@@ -29,7 +29,6 @@ This extension adds YAML snippets for **all** [AWS SAM resources](https://docs.a
 > </details>
 
 ---
-
 ## Features
 
 1. Adds support for the following SAM resource types:
@@ -64,20 +63,25 @@ This extension adds YAML snippets for **all** [AWS SAM resources](https://docs.a
 ---
 ## AWS CloudFormation Snippets for VS Code
 
-If you use CloudFormation to create your infrastructure as Code, then have a look at [this VS Code extension](https://marketplace.visualstudio.com/items?itemName=dannysteenman.cloudformation-yaml-snippets) I published that adds JSON and YAML snippets for all the AWS CloudFormation resources into Visual Studio Code.
+If you use AWS CloudFormation to manage your infrastructure as code, check out the [CloudFormation Snippets](https://marketplace.visualstudio.com/items?itemName=dannysteenman.cloudformation-yaml-snippets) VS Code extension. This extension provides comprehensive coverage, including snippets for:
+
+- All AWS CloudFormation resources
+- All AWS Serverless Application Model (SAM) resource types
+
+The snippets support both YAML and JSON CloudFormation templates, streamlining your infrastructure development workflow.
+
+**Key features include:**
+- Autocomplete by simply typing the resource name (e.g., `ec2-instance`)
+- Intrinsic functions, conditions, and a wide variety of parameter types
+- Placeholders for quick navigation within each resource
+- Inline documentation links for each resource
+- Automatic weekly updates with the latest CloudFormation Resource Specification
 
 ---
 ## Support
 
 If you have a feature request or an issue, please let me know on [Github](https://github.com/dannysteenman/vscode-sam-snippets/issues)
 
-## Contributing
-
-If you want to add more snippets, your contribution is more than welcome!
-
-Review the [Contributing Guidelines](https://github.com/dannysteenman/vscode-sam-snippets/blob/main/.github/CONTRIBUTING.md).
-
----
 ## Author
 
 **[Danny Steenman](https://github.com/dannysteenman)**
