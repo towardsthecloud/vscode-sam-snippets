@@ -1,0 +1,57 @@
+{
+  "name": "sam-snippets",
+  "displayName": "AWS SAM Snippets",
+  "description": "This extension adds snippets for all the AWS SAM resources into Visual Studio Code.",
+  "author": "Danny Steenman",
+  "version": "1.0.0",
+  "publisher": "dannysteenman",
+  "icon": "images/sam-snippets-extension-icon.png",
+  "homepage": "https://towardsthecloud.com",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dannysteenman/vscode-sam-snippets.git"
+  },
+  "engines": {
+    "vscode": "^1.31.0"
+  },
+  "galleryBanner": {
+    "color": "#2B2C33",
+    "theme": "dark"
+  },
+  "categories": ["Snippets"],
+  "keywords": ["aws", "serverless", "sam", "template", "yml"],
+  "badges": [
+    {
+      "url": "https://img.shields.io/visual-studio-marketplace/v/dannysteenman.sam-snippets",
+      "href": "https://marketplace.visualstudio.com/items?itemName=dannysteenman.sam-snippets",
+      "description": "Version"
+    },
+    {
+      "url": "https://img.shields.io/visual-studio-marketplace/i/dannysteenman.sam-snippets",
+      "href": "https://marketplace.visualstudio.com/items?itemName=dannysteenman.sam-snippets",
+      "description": "Installs"
+    },
+    {
+      "url": "https://img.shields.io/visual-studio-marketplace/stars/dannysteenman.sam-snippets",
+      "href": "https://marketplace.visualstudio.com/items?itemName=dannysteenman.sam-snippets",
+      "description": "Rating"
+    }
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "yaml",
+        "path": "./snippets/yaml-condition-functions.json"
+      },
+      {
+        "language": "yaml",
+        "path": "./snippets/yaml-intrinsic-functions.json"
+      },
+      {
+        "language": "yaml",
+        "path": "./snippets/yaml-sam-resource-types.json"
+      }
+    ]
+  }
+}
