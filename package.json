@@ -1,6 +1,6 @@
 {
   "name": "sam-snippets",
-  "displayName": "SAM Snippets",
+  "displayName": "AWS SAM Snippets",
   "description": "Adds snippets for all the AWS Serverless Application Model (SAM) resources in VS Code.",
   "author": "Danny Steenman",
   "version": "1.2.0",
@@ -19,16 +19,8 @@
     "color": "#2B2C33",
     "theme": "dark"
   },
-  "categories": [
-    "Snippets"
-  ],
-  "keywords": [
-    "aws",
-    "serverless",
-    "sam",
-    "template",
-    "yml"
-  ],
+  "categories": ["Snippets"],
+  "keywords": ["aws", "serverless", "sam", "template", "yml"],
   "badges": [
     {
       "url": "https://img.shields.io/visual-studio-marketplace/v/dannysteenman.sam-snippets",
