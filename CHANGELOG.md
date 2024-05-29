@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+1.3.0 (2024-05-28)
+------------------
+- Feat: add openvsx badge. [Danny Steenman]
+- Chore: update package.json. [Danny Steenman]
+
+
 1.2.0 (2024-04-13)
 ------------------
 - Feat: improve readme. [Danny Steenman]
