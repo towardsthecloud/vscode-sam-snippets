@@ -2,6 +2,11 @@ Changelog
 =========
 
 
+1.4.0 (2024-06-06)
+------------------
+- Feat: rename display name. [Danny Steenman]
+
+
 1.3.0 (2024-05-28)
 ------------------
 - Feat: add openvsx badge. [Danny Steenman]
