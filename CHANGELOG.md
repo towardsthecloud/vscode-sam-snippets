@@ -2,6 +2,11 @@ Changelog
 =========
 
 
+1.5.0 (2024-06-27)
+------------------
+- Feat: Update README.md and add contact information. [Danny Steenman]
+
+
 1.4.0 (2024-06-06)
 ------------------
 - Feat: rename display name. [Danny Steenman]
