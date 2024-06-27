@@ -2,6 +2,11 @@ Changelog
 =========
 
 
+1.6.0 (2024-06-27)
+------------------
+- Chore: update README.md. [Danny Steenman]
+
+
 1.5.0 (2024-06-27)
 ------------------
 - Feat: Update README.md and add contact information. [Danny Steenman]
