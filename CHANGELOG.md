@@ -2,6 +2,11 @@ Changelog
 =========
 
 
+1.8.0 (2024-10-25)
+------------------
+- Chore: update vscode extension icon. [Danny Steenman]
+
+
 1.7.0 (2024-06-27)
 ------------------
 - Chore: Update README.md. [Danny Steenman]
