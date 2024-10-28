@@ -5,15 +5,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: "16"
+          node-version: "20"
       - name: Install Python
         run: |
           set -x -e
@@ -22,14 +22,23 @@ jobs:
       - name: Commit changes to Github
         run: |
           set -x -e
+          # Configure git
           git config --global user.name 'Github Actions'
           git config --global user.email 'danny@towardsthecloud.com'
+
+          # Update version
           npm version minor --force --no-git-tag-version
-          package_version=$(cat package.json|grep 'version":'|sed 's/[",]//g'|awk '{print $2}')
-          git tag $package_version
-          gitchangelog|tee "CHANGELOG.md"
-          git commit -am "Changelog version: $package_version"
+          package_version=$(cat package.json | grep 'version":' | sed 's/[",]//g' | awk '{print $2}')
+
+          # Generate changelog
+          gitchangelog | tee "CHANGELOG.md"
+
+          # Commit and push changes
+          git commit -am "build: auto-update snippets to version: $package_version"
           git push
+
+          # Create and push tag
+          git tag $package_version
           git push origin --tags
       - name: Publish to Visual Studio Marketplace
         uses: HaaLeo/publish-vscode-extension@v1
