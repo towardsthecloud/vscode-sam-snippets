@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+(unreleased)
+------------
+- Ci(workflow): update action versions and node version. [Danny
+  Steenman]
+- Chore: update .vscodeignore with new patterns. [Danny Steenman]
+
+
 1.8.0 (2024-10-25)
 ------------------
 - Chore: update vscode extension icon. [Danny Steenman]
