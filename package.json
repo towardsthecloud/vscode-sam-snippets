@@ -10,7 +10,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dannysteenman/vscode-sam-snippets.git"
+    "url": "https://github.com/towardsthecloud/vscode-sam-snippets.git"
   },
   "engines": {
     "vscode": "^1.31.0"
@@ -19,16 +19,8 @@
     "color": "#2B2C33",
     "theme": "dark"
   },
-  "categories": [
-    "Snippets"
-  ],
-  "keywords": [
-    "aws",
-    "serverless",
-    "sam",
-    "template",
-    "yml"
-  ],
+  "categories": ["Snippets"],
+  "keywords": ["aws", "serverless", "sam", "template", "yml"],
   "badges": [
     {
       "url": "https://img.shields.io/visual-studio-marketplace/v/dannysteenman.sam-snippets",
