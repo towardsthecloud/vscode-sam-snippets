@@ -4,6 +4,13 @@ Changelog
 
 (unreleased)
 ------------
+- Chore: update repository links to reflect new ownership. [Danny
+  Steenman]
+
+
+1.9.0 (2024-10-28)
+------------------
+- Build: auto-update snippets to version: 1.9.0. [Github Actions]
 - Ci(workflow): update action versions and node version. [Danny
   Steenman]
 - Chore: update .vscodeignore with new patterns. [Danny Steenman]
