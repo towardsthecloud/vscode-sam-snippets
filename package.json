@@ -3,7 +3,7 @@
   "displayName": "AWS Serverless Application Model (SAM) Snippets",
   "description": "Adds snippets for all the AWS Serverless Application Model (SAM) resources in VS Code.",
   "author": "Danny Steenman",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "publisher": "dannysteenman",
   "icon": "images/sam-snippets-extension-icon.png",
   "homepage": "https://towardsthecloud.com",
