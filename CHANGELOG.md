@@ -4,6 +4,12 @@ Changelog
 
 (unreleased)
 ------------
+- Update README.md. [Danny Steenman]
+
+
+1.12.0 (2025-05-21)
+-------------------
+- Build: auto-update snippets to version: 1.12.0. [Github Actions]
 - Chore: update readme. [Danny Steenman]
 
 
