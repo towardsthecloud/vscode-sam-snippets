@@ -5,6 +5,14 @@ Changelog
 (unreleased)
 ------------
 - Update README.md. [Danny Steenman]
+- Ci(workflow): change trigger to push on main branch and retain manual
+  dispatch. [Danny Steenman]
+
+
+1.13.0 (2025-07-04)
+-------------------
+- Build: auto-update snippets to version: 1.13.0. [Github Actions]
+- Update README.md. [Danny Steenman]
 
 
 1.12.0 (2025-05-21)
