@@ -5,6 +5,12 @@ Changelog
 (unreleased)
 ------------
 - Update README.md. [Danny Steenman]
+
+
+1.14.0 (2025-07-07)
+-------------------
+- Build: auto-update snippets to version: 1.14.0. [Github Actions]
+- Update README.md. [Danny Steenman]
 - Ci(workflow): change trigger to push on main branch and retain manual
   dispatch. [Danny Steenman]
 
