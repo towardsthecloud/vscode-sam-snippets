@@ -4,6 +4,12 @@ Changelog
 
 (unreleased)
 ------------
+- Chore: remove badges from README and package.json. [Danny Steenman]
+
+
+1.17.0 (2025-12-05)
+-------------------
+- Build: auto-update snippets to version: 1.17.0. [Github Actions]
 - Update README.md. [Danny Steenman]
 
 
