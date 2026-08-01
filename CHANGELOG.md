@@ -4,6 +4,12 @@ Changelog
 
 (unreleased)
 ------------
+- Docs: update readme tip. [Danny Steenman]
+
+
+1.18.0 (2026-04-29)
+-------------------
+- Build: auto-update snippets to version: 1.18.0. [Github Actions]
 - Chore: remove badges from README and package.json. [Danny Steenman]
 
 
