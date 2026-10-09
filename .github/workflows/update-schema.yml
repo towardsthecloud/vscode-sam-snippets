@@ -1,0 +1,45 @@
+name: Update SAM definitions
+on:
+  schedule:
+    - cron: '17 7 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+concurrency:
+  group: sam-schema-update
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run schema:update && npm run generate
+      - name: Open a reviewable update PR
+        id: pull-request
+        uses: peter-evans/create-pull-request@v8.1.1
+        with:
+          branch: codex/update-sam-definitions
+          commit-message: 'feat: update SAM resource snippets'
+          title: 'feat: update SAM resource snippets'
+          body: |
+            Update the pinned AWS SAM schema snapshot and regenerate the resource snippets.
+
+            Review changes to properties, types, and curated overrides before merging. This workflow does not publish an extension or change its version.
+
+            The Validate workflow is dispatched on this branch so the generated VSIX and editor checks run before review.
+          add-paths: |
+            data/sam-resources.json
+            snippets/yaml-sam-resource-types.json
+      - name: Validate the bot PR
+        if: steps.pull-request.outputs.pull-request-operation == 'created' || steps.pull-request.outputs.pull-request-operation == 'updated'
+        run: gh workflow run validate.yml --ref codex/update-sam-definitions
+        env:
+          GH_TOKEN: ${{ github.token }}

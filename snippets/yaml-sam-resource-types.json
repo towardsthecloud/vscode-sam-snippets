@@ -1,297 +1,492 @@
 {
   "SAM-template": {
-    "prefix": "sam-template",
-    "body": [
-      "AWSTemplateFormatVersion: 2010-09-09",
-      "Transform: AWS::Serverless-2016-10-31",
-      "Globals:",
-      "\t${1:set of globals}",
-      "Description: |",
-      "\t${2:String}",
-      "Metadata:",
-      "\t${3:template metadata}",
-      "Parameters:",
-      "\t${4:set of parameters}",
-      "Mappings:",
-      "\t${5:set of mappings}",
-      "Conditions:",
-      "\t${6:set of conditions}",
-      "Resources:",
-      "\t${7:set of resources}",
-      "Outputs:",
-      "\t${8:set of outputs}"
+    "prefix": [
+      "sam-template",
+      "sam"
     ],
-    "description": "The full YAML-formatted SAM template that contains all template sections",
+    "body": [
+      "AWSTemplateFormatVersion: '2010-09-09'",
+      "Transform: AWS::Serverless-2016-10-31",
+      "Description: ${1:Serverless application}",
+      "Resources:",
+      "\t${2:Function}:",
+      "\t\tType: AWS::Serverless::Function",
+      "\t\tProperties:",
+      "\t\t\tRuntime: python3.13",
+      "\t\t\tHandler: index.handler",
+      "\t\t\tInlineCode: |",
+      "\t\t\t\tdef handler(event, context):",
+      "\t\t\t\t\treturn {\"statusCode\": 200, \"body\": \"Hello\"}",
+      "$0"
+    ],
+    "description": "Minimal SAM template with an inline Lambda function.",
+    "scope": "yaml"
+  },
+  "SAM-function-zip": {
+    "prefix": "sam-function-zip",
+    "body": [
+      "${1:Function}:",
+      "\tType: AWS::Serverless::Function",
+      "\tProperties:",
+      "\t\tCodeUri: ${2:src/}",
+      "\t\tHandler: ${3:app.handler}",
+      "\t\tRuntime: ${4:python3.13}",
+      "$0"
+    ],
+    "description": "Lambda function using local ZIP source code. Insert under Resources.",
+    "scope": "yaml"
+  },
+  "SAM-function-image": {
+    "prefix": "sam-function-image",
+    "body": [
+      "${1:Function}:",
+      "\tType: AWS::Serverless::Function",
+      "\tProperties:",
+      "\t\tPackageType: Image",
+      "\t\tImageUri: ${2:123456789012.dkr.ecr.us-east-1.amazonaws.com/example:latest}",
+      "$0"
+    ],
+    "description": "Lambda function using an ECR container image. Insert under Resources.",
+    "scope": "yaml"
+  },
+  "SAM-http-event": {
+    "prefix": "sam-http-event",
+    "body": [
+      "${1:ApiRequest}:",
+      "\tType: HttpApi",
+      "\tProperties:",
+      "\t\tPath: ${2:/hello}",
+      "\t\tMethod: ${3|get,post,put,patch,delete,options,head,any|}",
+      "$0"
+    ],
+    "description": "HTTP API event. Insert under a Function's Events mapping.",
+    "scope": "yaml"
+  },
+  "SAM-parameter-string": {
+    "prefix": "sam-parameter-string",
+    "body": [
+      "${1:Environment}:",
+      "\tType: String",
+      "\tDefault: ${2:dev}",
+      "$0"
+    ],
+    "description": "String parameter. Insert under Parameters.",
+    "scope": "yaml"
+  },
+  "SAM-parameter-number": {
+    "prefix": "sam-parameter-number",
+    "body": [
+      "${1:MemorySize}:",
+      "\tType: Number",
+      "\tDefault: ${2:128}",
+      "$0"
+    ],
+    "description": "Numeric parameter. Insert under Parameters.",
+    "scope": "yaml"
+  },
+  "SAM-parameter-list": {
+    "prefix": "sam-parameter-list",
+    "body": [
+      "${1:SubnetIds}:",
+      "\tType: CommaDelimitedList",
+      "\tDefault: '${2:subnet-12345678,subnet-87654321}'",
+      "$0"
+    ],
+    "description": "Comma-delimited list parameter. Insert under Parameters.",
+    "scope": "yaml"
+  },
+  "SAM-parameter-ssm": {
+    "prefix": "sam-parameter-ssm",
+    "body": [
+      "${1:Configuration}:",
+      "\tType: AWS::SSM::Parameter::Value<String>",
+      "\tDefault: ${2:/application/configuration}",
+      "$0"
+    ],
+    "description": "Systems Manager parameter reference. Insert under Parameters.",
     "scope": "yaml"
   },
   "AWS::Serverless::Api": {
+    "prefix": [
+      "serverless-api",
+      "serverless-api-full"
+    ],
     "body": [
       "${1:LogicalID}:",
-      "  Type: AWS::Serverless::Api",
-      "  Properties:",
-      "    AccessLogSetting: ${2:AccessLogSetting}",
-      "    AlwaysDeploy: ${3:Boolean}",
-      "    ApiKeySourceType: \"${4:String}\"",
-      "    Auth: ${5:ApiAuth}",
-      "    BinaryMediaTypes: ${6:List}",
-      "    CacheClusterEnabled: ${7:Boolean}",
-      "    CacheClusterSize: \"${8:String}\"",
-      "    CanarySetting: ${9:CanarySetting}",
-      "    Cors: ${10:String|CorsConfiguration}",
-      "    DefinitionBody: ${11:JSON}",
-      "    DefinitionUri: ${12:String|ApiDefinition}",
-      "    Description: \"${13:String}\"",
-      "    DisableExecuteApiEndpoint: ${14:Boolean}",
-      "    Domain: ${15:DomainConfiguration}",
-      "    EndpointConfiguration: ${16:EndpointConfiguration}",
-      "    FailOnWarnings: ${17:Boolean}",
-      "    GatewayResponses: ${18:Map}",
-      "    MergeDefinitions: ${19:Boolean}",
-      "    MethodSettings: ${20:MethodSettings}",
-      "    MinimumCompressionSize: ${21:Number}",
-      "    Mode: \"${22:String}\"",
-      "    Models: ${23:Map}",
-      "    Name: \"${24:String}\"",
-      "    OpenApiVersion: \"${25:String}\"",
-      "    PropagateTags: ${26:Boolean}",
-      "    StageName: \"${27:String}\" # Required",
-      "    Tags: ${28:Map}",
-      "    TracingEnabled: ${29:Boolean}",
-      "    Variables: ${30:Map}"
+      "\tType: AWS::Serverless::Api",
+      "\tProperties:",
+      "\t\tAccessLogSetting: ${2:{\\}}",
+      "\t\tAlwaysDeploy: ${3:false}",
+      "\t\tApiKeySourceType: \"${4:String}\"",
+      "\t\tAuth: ${5:{\\}}",
+      "\t\tBinaryMediaTypes: ${6:[]}",
+      "\t\tCacheClusterEnabled: ${7:false}",
+      "\t\tCacheClusterSize: \"${8:String}\"",
+      "\t\tCanarySetting: ${9:{\\}}",
+      "\t\tCors: \"${10:String}\"",
+      "\t\tDefinitionBody: ${11:{\\}}",
+      "\t\tDefinitionUri: \"${12:String}\"",
+      "\t\tDescription: \"${13:String}\"",
+      "\t\tDisableExecuteApiEndpoint: ${14:false}",
+      "\t\tDomain: ${15:{\\}}",
+      "\t\tEndpointAccessMode: \"${16:String}\"",
+      "\t\tEndpointConfiguration: ${17:{\\}}",
+      "\t\tFailOnWarnings: ${18:false}",
+      "\t\tGatewayResponses: ${19:{\\}}",
+      "\t\tMergeDefinitions: ${20:false}",
+      "\t\tMethodSettings: ${21:[]}",
+      "\t\tMinimumCompressionSize: ${22:0}",
+      "\t\tMode: \"${23:String}\"",
+      "\t\tModels: ${24:{\\}}",
+      "\t\tName: \"${25:String}\"",
+      "\t\tOpenApiVersion: \"${26:String}\"",
+      "\t\tPolicy: ${27:{\\}}",
+      "\t\tPropagateTags: ${28:false}",
+      "\t\tSecurityPolicy: \"${29:String}\"",
+      "\t\tStageName: \"${30:String}\" # Required",
+      "\t\tTags: ${31:{\\}}",
+      "\t\tTracingEnabled: ${32:false}",
+      "\t\tVariables: ${33:{\\}}",
+      "$0"
     ],
-    "description": [
-      "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-api.html#sam-api-gatewayresponses",
-      "Creates a collection of Amazon API Gateway resources and methods that can be invoked through HTTPS endpoints."
-    ],
-    "prefix": "serverless-api",
+    "description": "Full AWS::Serverless::Api property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-api.html",
     "scope": "yaml"
   },
   "AWS::Serverless::Application": {
+    "prefix": [
+      "serverless-application",
+      "serverless-application-full"
+    ],
     "body": [
       "${1:LogicalID}:",
-      "  Type: AWS::Serverless::Application",
-      "  Properties:",
-      "    Location: \"${2:String|ApplicationLocationObject}\" # Required",
-      "    NotificationARNs: ${3:List}",
-      "    Parameters: ${4:Map}",
-      "    Tags: ${5:Map}",
-      "    TimeoutInMinutes: ${6:Number}"
+      "\tType: AWS::Serverless::Application",
+      "\tProperties:",
+      "\t\tLocation: \"${2:String}\" # Required",
+      "\t\tNotificationARNs: ${3:[]}",
+      "\t\tParameters: ${4:{\\}}",
+      "\t\tTags: ${5:{\\}}",
+      "\t\tTimeoutInMinutes: ${6:0}",
+      "$0"
     ],
-    "description": [
-      "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-application.html",
-      "Embeds a serverless application from the AWS Serverless Application Repository or from an Amazon S3 bucket as a nested application."
+    "description": "Full AWS::Serverless::Application property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-application.html",
+    "scope": "yaml"
+  },
+  "AWS::Serverless::CapacityProvider": {
+    "prefix": [
+      "serverless-capacityprovider",
+      "serverless-capacityprovider-full"
     ],
-    "prefix": "serverless-application",
+    "body": [
+      "${1:LogicalID}:",
+      "\tType: AWS::Serverless::CapacityProvider",
+      "\tProperties:",
+      "\t\tCapacityProviderName: \"${2:String}\"",
+      "\t\tInstanceRequirements: ${3:{\\}}",
+      "\t\tKmsKeyArn: \"${4:String}\"",
+      "\t\tLoggingConfig: ${5:{\\}}",
+      "\t\tManagedResourceTags: ${6:{\\}}",
+      "\t\tOperatorRole: \"${7:String}\"",
+      "\t\tPropagateTags: ${8:false}",
+      "\t\tScalingConfig: ${9:{\\}}",
+      "\t\tTags: ${10:{\\}}",
+      "\t\tVpcConfig: ${11:{\\}} # Required",
+      "$0"
+    ],
+    "description": "Full AWS::Serverless::CapacityProvider property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-capacityprovider.html",
     "scope": "yaml"
   },
   "AWS::Serverless::Connector": {
+    "prefix": [
+      "serverless-connector",
+      "serverless-connector-full"
+    ],
     "body": [
       "${1:LogicalID}:",
-      "  Type: AWS::Serverless::Connector",
-      "  Properties:",
-      "    Destination:",
-      "      Arn: \"${2:String}\"",
-      "      Id: \"${3:String}\"",
-      "      Name: \"${4:String}\"",
-      "      Qualifier: \"${5:String}\"",
-      "      QueueUrl: \"${6:String}\"",
-      "      ResourceId: \"${7:String}\"",
-      "      RoleName: \"${8:String}\"",
-      "      Type: \"${9:String}\"",
-      "    Permissions: \"${10:List}\" # Required",
-      "    Source:",
-      "      Arn: \"${11:String}\"",
-      "      Id: \"${12:String}\"",
-      "      Name: \"${13:String}\"",
-      "      Qualifier: \"${14:String}\"",
-      "      QueueUrl: \"${15:String}\"",
-      "      ResourceId: \"${16:String}\"",
-      "      RoleName: \"${17:String}\"",
-      "      Type: \"${18:String}\""
+      "\tType: AWS::Serverless::Connector",
+      "\tProperties:",
+      "\t\tDestination: ${2:{\"Id\":\"Table\"\\}} # Required",
+      "\t\tPermissions: ${3:[\"Read\"]} # Required",
+      "\t\tSource: ${4:{\"Id\":\"Function\"\\}} # Required",
+      "$0"
     ],
-    "description": [
-      "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-connector.html",
-      "Configures permissions between two resources"
-    ],
-    "prefix": "serverless-connector",
+    "description": "Full AWS::Serverless::Connector property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-connector.html",
     "scope": "yaml"
   },
   "AWS::Serverless::Function": {
+    "prefix": [
+      "serverless-function",
+      "serverless-function-full"
+    ],
     "body": [
       "${1:LogicalID}:",
-      "  Type: AWS::Serverless::Function",
-      "  Properties:",
-      "    Architectures: ${2:List}",
-      "    AssumeRolePolicyDocument: ${3:JSON}",
-      "    AutoPublishAlias: \"${4:String}\"",
-      "    AutoPublishAliasAllProperties: ${5:Boolean}",
-      "    AutoPublishCodeSha256: \"${6:String}\"",
-      "    CodeSigningConfigArn: \"${7:String}\"",
-      "    CodeUri: ${8:String|FunctionCode}",
-      "    DeadLetterQueue: ${9:Map|DeadLetterQueue}",
-      "    DeploymentPreference: ${10:DeploymentPreference}",
-      "    Description: \"${11:String}\"",
-      "    Environment: ${12:Environment}",
-      "    EphemeralStorage: ${13:EphemeralStorage}",
-      "    EventInvokeConfig: ${14:EventInvokeConfiguration}",
-      "    Events: ${15:EventSource}",
-      "    FileSystemConfigs: ${16:List}",
-      "    FunctionName: \"${17:String}\"",
-      "    FunctionUrlConfig: ${18:FunctionUrlConfig}",
-      "    Handler: \"${19:String}\"",
-      "    ImageConfig: ${20:ImageConfig}",
-      "    ImageUri: \"${21:String}\"",
-      "    InlineCode: \"${22:String}\"",
-      "    KmsKeyArn: \"${23:String}\"",
-      "    Layers: ${24:List}",
-      "    LoggingConfig: ${25:LoggingConfig}",
-      "    MemorySize: ${26:Number}",
-      "    PackageType: \"${27:String}\"",
-      "    PermissionsBoundary: \"${28:String}\"",
-      "    Policies: ${29:String|List|Map}",
-      "    PropagateTags: ${30:Boolean}",
-      "    ProvisionedConcurrencyConfig: ${31:ProvisionedConcurrencyConfig}",
-      "    ReservedConcurrentExecutions: ${32:Number}",
-      "    Role: \"${33:String}\"",
-      "    RolePath: \"${34:String}\"",
-      "    Runtime: \"${35:String}\"",
-      "    RuntimeManagementConfig: ${36:RuntimeManagementConfig}",
-      "    SnapStart: ${37:SnapStart}",
-      "    Tags: ${38:Map}",
-      "    Timeout: ${39:Number}",
-      "    Tracing: \"${40:String}\"",
-      "    VersionDescription: \"${41:String}\"",
-      "    VpcConfig: ${42:VpcConfig}"
+      "\tType: AWS::Serverless::Function",
+      "\tProperties:",
+      "\t\tArchitectures: ${2:[]}",
+      "\t\tAssumeRolePolicyDocument: ${3:{\\}}",
+      "\t\tAutoPublishAlias: \"${4:String}\"",
+      "\t\tAutoPublishAliasAllProperties: ${5:false}",
+      "\t\tAutoPublishCodeSha256: \"${6:String}\"",
+      "\t\tCapacityProviderConfig: ${7:{\\}}",
+      "\t\tCodeSigningConfigArn: \"${8:String}\"",
+      "\t\tCodeUri: \"${9:String}\"",
+      "\t\tDeadLetterQueue: ${10:{\\}}",
+      "\t\tDeploymentPreference: ${11:{\\}}",
+      "\t\tDescription: \"${12:String}\"",
+      "\t\tDurableConfig: ${13:{\\}}",
+      "\t\tEnvironment: ${14:{\\}}",
+      "\t\tEphemeralStorage: ${15:{\\}}",
+      "\t\tEventInvokeConfig: ${16:{\\}}",
+      "\t\tEvents: ${17:{\\}}",
+      "\t\tFileSystemConfigs: ${18:[]}",
+      "\t\tFunctionName: \"${19:String}\"",
+      "\t\tFunctionScalingConfig: ${20:{\\}}",
+      "\t\tFunctionUrlConfig: ${21:{\\}}",
+      "\t\tHandler: \"${22:String}\"",
+      "\t\tImageConfig: ${23:{\\}}",
+      "\t\tImageUri: \"${24:String}\"",
+      "\t\tInlineCode: \"${25:String}\"",
+      "\t\tKmsKeyArn: \"${26:String}\"",
+      "\t\tLayers: ${27:[]}",
+      "\t\tLoggingConfig: ${28:{\\}}",
+      "\t\tMemorySize: ${29:0}",
+      "\t\tPackageType: \"${30:String}\"",
+      "\t\tPermissionsBoundary: \"${31:String}\"",
+      "\t\tPolicies: \"${32:String}\"",
+      "\t\tPropagateTags: ${33:false}",
+      "\t\tProvisionedConcurrencyConfig: ${34:{\\}}",
+      "\t\tPublishToLatestPublished: ${35:false}",
+      "\t\tRecursiveLoop: \"${36:String}\"",
+      "\t\tReservedConcurrentExecutions: ${37:0}",
+      "\t\tRole: \"${38:String}\"",
+      "\t\tRolePath: \"${39:String}\"",
+      "\t\tRuntime: \"${40:String}\"",
+      "\t\tRuntimeManagementConfig: ${41:{\\}}",
+      "\t\tSnapStart: ${42:{\\}}",
+      "\t\tSourceKMSKeyArn: \"${43:String}\"",
+      "\t\tTags: ${44:{\\}}",
+      "\t\tTenancyConfig: ${45:{\\}}",
+      "\t\tTimeout: ${46:0}",
+      "\t\tTracing: \"${47|Active,PassThrough,Disabled|}\"",
+      "\t\tVersionDeletionPolicy: \"${48:String}\"",
+      "\t\tVersionDescription: \"${49:String}\"",
+      "\t\tVpcConfig: ${50:{\\}}",
+      "$0"
     ],
-    "description": [
-      "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html",
-      "Creates an AWS Lambda function, an AWS Identity and Access Management (IAM) execution role, and event source mappings that trigger the function."
-    ],
-    "prefix": "serverless-function",
+    "description": "Full AWS::Serverless::Function property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html",
     "scope": "yaml"
   },
   "AWS::Serverless::GraphQLApi": {
+    "prefix": [
+      "serverless-graphqlapi",
+      "serverless-graphqlapi-full"
+    ],
     "body": [
-      "${1:LogicalId}:",
-      "  Type: AWS::Serverless::GraphQLApi",
-      "  Properties:",
-      "    ApiKeys: ${2:ApiKeys}",
-      "    Auth: \"${3:Auth}\" # Required",
-      "    Cache: ${4:AWS::AppSync::ApiCache}",
-      "    DataSources: \"${5:DataSource}\" # Required",
-      "    DomainName: ${6:AWS::AppSync::DomainName}",
-      "    Functions: \"${7:Function}\" # Required",
-      "    Logging: ${8:LogConfig}",
-      "    Name: \"${9:String}\"",
-      "    Resolvers: \"${10:Resolver}\" # Required",
-      "    SchemaInline: \"${11:String}\"",
-      "    SchemaUri: \"${12:String}\"",
-      "    Tags:",
-      "      - ${13:Tag}",
-      "    XrayEnabled: ${14:Boolean}"
+      "${1:LogicalID}:",
+      "\tType: AWS::Serverless::GraphQLApi",
+      "\tProperties:",
+      "\t\tApiKeys: ${2:{\\}}",
+      "\t\tAuth: ${3:{\"Type\":\"AWS_IAM\"\\}} # Required",
+      "\t\tCache: ${4:{\\}}",
+      "\t\tDataSources: ${5:{\\}} # Required",
+      "\t\tDomainName: ${6:{\\}}",
+      "\t\tFunctions: ${7:{\\}} # Required",
+      "\t\tIntrospectionConfig: \"${8:String}\"",
+      "\t\tLogging: ${9:{\\}}",
+      "\t\tName: \"${10:String}\"",
+      "\t\tOwnerContact: \"${11:String}\"",
+      "\t\tQueryDepthLimit: ${12:0}",
+      "\t\tResolverCountLimit: ${13:0}",
+      "\t\tResolvers: ${14:{\\}} # Required",
+      "\t\tSchemaInline: \"${15:String}\"",
+      "\t\tSchemaUri: \"${16:String}\"",
+      "\t\tTags: ${17:{\\}}",
+      "\t\tVisibility: \"${18:String}\"",
+      "\t\tXrayEnabled: ${19:false}",
+      "$0"
     ],
-    "description": [
-      "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-graphqlapi.html",
-      "Use the AWS Serverless Application Model (AWS SAM) AWS::Serverless::GraphQLApi resource type to create and configure an AWS AppSync GraphQL API for your serverless application."
-    ],
-    "prefix": "serverless-graphqlapi",
+    "description": "Full AWS::Serverless::GraphQLApi property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-graphqlapi.html",
     "scope": "yaml"
   },
   "AWS::Serverless::HttpApi": {
+    "prefix": [
+      "serverless-httpapi",
+      "serverless-httpapi-full"
+    ],
     "body": [
       "${1:LogicalID}:",
-      "  Type: AWS::Serverless::HttpApi",
-      "  Properties:",
-      "    AccessLogSettings: ${2:AccessLogSettings}",
-      "    Auth: ${3:HttpApiAuth}",
-      "    CorsConfiguration: ${4:String|HttpApiCorsConfiguration}",
-      "    DefaultRouteSettings: ${5:RouteSettings}",
-      "    DefinitionBody: ${6:JSON}",
-      "    DefinitionUri: ${7:String|HttpApiDefinition}",
-      "    Description: \"${8:String}\"",
-      "    DisableExecuteApiEndpoint: ${9:Boolean}",
-      "    Domain: ${10:HttpApiDomainConfiguration}",
-      "    FailOnWarnings: ${11:Boolean}",
-      "    Name: \"${12:String}\"",
-      "    PropagateTags: ${13:Boolean}",
-      "    RouteSettings: ${14:RouteSettings}",
-      "    StageName: \"${15:String}\"",
-      "    StageVariables: ${16:Json}",
-      "    Tags: ${17:Map}"
+      "\tType: AWS::Serverless::HttpApi",
+      "\tProperties:",
+      "\t\tAccessLogSettings: ${2:{\\}}",
+      "\t\tAuth: ${3:{\\}}",
+      "\t\tCorsConfiguration: \"${4:String}\"",
+      "\t\tDefaultRouteSettings: ${5:{\\}}",
+      "\t\tDefinitionBody: ${6:{\\}}",
+      "\t\tDefinitionUri: \"${7:String}\"",
+      "\t\tDescription: \"${8:String}\"",
+      "\t\tDisableExecuteApiEndpoint: ${9:false}",
+      "\t\tDomain: ${10:{\\}}",
+      "\t\tFailOnWarnings: ${11:false}",
+      "\t\tName: \"${12:String}\"",
+      "\t\tPropagateTags: ${13:false}",
+      "\t\tRouteSettings: ${14:{\\}}",
+      "\t\tStageName: \"${15:String}\"",
+      "\t\tStageVariables: ${16:{\\}}",
+      "\t\tTags: ${17:{\\}}",
+      "$0"
     ],
-    "description": [
-      "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-httpapi.html",
-      "Creates an Amazon API Gateway HTTP API, which enables you to create RESTful APIs with lower latency and lower costs than REST APIs."
-    ],
-    "prefix": "serverless-httpapi",
+    "description": "Full AWS::Serverless::HttpApi property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-httpapi.html",
     "scope": "yaml"
   },
   "AWS::Serverless::LayerVersion": {
+    "prefix": [
+      "serverless-layerversion",
+      "serverless-layerversion-full"
+    ],
     "body": [
       "${1:LogicalID}:",
-      "  Type: AWS::Serverless::LayerVersion",
-      "  Properties:",
-      "    CompatibleArchitectures: ${2:List}",
-      "    CompatibleRuntimes: ${3:List}",
-      "    ContentUri: \"${4:String|LayerContent}\" # Required",
-      "    Description: \"${5:String}\"",
-      "    LayerName: \"${6:String}\"",
-      "    LicenseInfo: \"${7:String}\"",
-      "    RetentionPolicy: \"${8:String}\""
+      "\tType: AWS::Serverless::LayerVersion",
+      "\tProperties:",
+      "\t\tCompatibleArchitectures: ${2:[]}",
+      "\t\tCompatibleRuntimes: ${3:[]}",
+      "\t\tContentUri: \"${4:String}\" # Required",
+      "\t\tDescription: \"${5:String}\"",
+      "\t\tLayerName: \"${6:String}\"",
+      "\t\tLicenseInfo: \"${7:String}\"",
+      "\t\tPublishLambdaVersion: ${8:false}",
+      "\t\tRetentionPolicy: \"${9:String}\"",
+      "$0"
     ],
-    "description": [
-      "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-layerversion.html",
-      "Creates a Lambda LayerVersion that contains library or runtime code needed by a Lambda Function."
+    "description": "Full AWS::Serverless::LayerVersion property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-layerversion.html",
+    "scope": "yaml"
+  },
+  "AWS::Serverless::MicrovmImage": {
+    "prefix": [
+      "serverless-microvmimage",
+      "serverless-microvmimage-full"
     ],
-    "prefix": "serverless-layerversion",
+    "body": [
+      "${1:LogicalID}:",
+      "\tType: AWS::Serverless::MicrovmImage",
+      "\tProperties:",
+      "\t\tAdditionalOsCapabilities: ${2:[]}",
+      "\t\tBaseImageArn: \"${3:String}\" # Required",
+      "\t\tBaseImageVersion: \"${4:String}\" # Required",
+      "\t\tBuildRoleArn: \"${5:String}\"",
+      "\t\tCodeUri: \"${6:String}\" # Required",
+      "\t\tCpuConfigurations: ${7:[]}",
+      "\t\tDescription: \"${8:String}\"",
+      "\t\tEgressNetworkConnectors: ${9:[]}",
+      "\t\tEnvironmentVariables: ${10:{\\}}",
+      "\t\tHooks: ${11:{\\}}",
+      "\t\tLogging: ${12:{\\}}",
+      "\t\tName: \"${13:String}\" # Required",
+      "\t\tPropagateTags: ${14:false}",
+      "\t\tResources: ${15:[]}",
+      "\t\tTags: ${16:{\\}}",
+      "$0"
+    ],
+    "description": "Full AWS::Serverless::MicrovmImage property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-microvmimage.html",
+    "scope": "yaml"
+  },
+  "AWS::Serverless::NetworkConnector": {
+    "prefix": [
+      "serverless-networkconnector",
+      "serverless-networkconnector-full"
+    ],
+    "body": [
+      "${1:LogicalID}:",
+      "\tType: AWS::Serverless::NetworkConnector",
+      "\tProperties:",
+      "\t\tName: \"${2:String}\"",
+      "\t\tOperatorRole: \"${3:String}\"",
+      "\t\tPropagateTags: ${4:false}",
+      "\t\tTags: ${5:{\\}}",
+      "\t\tVpcConfig: ${6:{\\}} # Required",
+      "$0"
+    ],
+    "description": "Full AWS::Serverless::NetworkConnector property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-networkconnector.html",
     "scope": "yaml"
   },
   "AWS::Serverless::SimpleTable": {
+    "prefix": [
+      "serverless-simpletable",
+      "serverless-simpletable-full"
+    ],
     "body": [
       "${1:LogicalID}:",
-      "  Type: AWS::Serverless::SimpleTable",
-      "  Properties:",
-      "    PointInTimeRecoverySpecification: ${2:PointInTimeRecoverySpecification}",
-      "    PrimaryKey: ${3:PrimaryKeyObject}",
-      "    ProvisionedThroughput: ${4:ProvisionedThroughput}",
-      "    SSESpecification: ${5:SSESpecification}",
-      "    TableName: \"${6:String}\"",
-      "    Tags: ${7:Map}"
+      "\tType: AWS::Serverless::SimpleTable",
+      "\tProperties:",
+      "\t\tPointInTimeRecoverySpecification: ${2:{\\}}",
+      "\t\tPrimaryKey: ${3:{\\}}",
+      "\t\tProvisionedThroughput: ${4:{\\}}",
+      "\t\tSSESpecification: ${5:{\\}}",
+      "\t\tTableName: \"${6:String}\"",
+      "\t\tTags: ${7:{\\}}",
+      "$0"
     ],
-    "description": [
-      "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-simpletable.html",
-      "Creates a DynamoDB table with a single attribute primary key. It is useful when data only needs to be accessed via a primary key."
-    ],
-    "prefix": "serverless-simpletable",
+    "description": "Full AWS::Serverless::SimpleTable property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-simpletable.html",
     "scope": "yaml"
   },
   "AWS::Serverless::StateMachine": {
+    "prefix": [
+      "serverless-statemachine",
+      "serverless-statemachine-full"
+    ],
     "body": [
       "${1:LogicalID}:",
-      "  Type: AWS::Serverless::StateMachine",
-      "  Properties:",
-      "    AutoPublishAlias: \"${2:String}\"",
-      "    Definition: ${3:Map}",
-      "    DefinitionSubstitutions: ${4:Map}",
-      "    DefinitionUri: ${5:String|S3Location}",
-      "    DeploymentPreference: ${6:DeploymentPreference}",
-      "    Events: ${7:EventSource}",
-      "    Logging: ${8:LoggingConfiguration}",
-      "    Name: \"${9:String}\"",
-      "    PermissionsBoundary: \"${10:String}\"",
-      "    Policies: ${11:String|List|Map}",
-      "    PropagateTags: ${12:Boolean}",
-      "    RolePath: \"${13:String}\"",
-      "    Role: \"${14:String}\"",
-      "    Tags: ${15:Map}",
-      "    Tracing: ${16:TracingConfiguration}",
-      "    Type: \"${17:String}\""
+      "\tType: AWS::Serverless::StateMachine",
+      "\tProperties:",
+      "\t\tAutoPublishAlias: \"${2:String}\"",
+      "\t\tDefinition: ${3:{\\}}",
+      "\t\tDefinitionSubstitutions: ${4:{\\}}",
+      "\t\tDefinitionUri: \"${5:String}\"",
+      "\t\tDeploymentPreference: ${6:{\\}}",
+      "\t\tEvents: ${7:{\\}}",
+      "\t\tLogging: ${8:{\\}}",
+      "\t\tName: \"${9:String}\"",
+      "\t\tPermissionsBoundary: \"${10:String}\"",
+      "\t\tPolicies: \"${11:String}\"",
+      "\t\tPropagateTags: ${12:false}",
+      "\t\tRole: \"${13:String}\"",
+      "\t\tRolePath: \"${14:String}\"",
+      "\t\tTags: ${15:{\\}}",
+      "\t\tTracing: ${16:{\\}}",
+      "\t\tType: \"${17:String}\"",
+      "\t\tUseAliasAsEventTarget: ${18:false}",
+      "$0"
     ],
-    "description": [
-      "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-statemachine.html",
-      "Creates an AWS Step Functions state machine, which you can use to orchestrate AWS Lambda functions and other AWS resources to form complex and robust workflows."
+    "description": "Full AWS::Serverless::StateMachine property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-statemachine.html",
+    "scope": "yaml"
+  },
+  "AWS::Serverless::WebSocketApi": {
+    "prefix": [
+      "serverless-websocketapi",
+      "serverless-websocketapi-full"
     ],
-    "prefix": "serverless-statemachine",
+    "body": [
+      "${1:LogicalID}:",
+      "\tType: AWS::Serverless::WebSocketApi",
+      "\tProperties:",
+      "\t\tAccessLogSettings: ${2:{\\}}",
+      "\t\tApiKeySelectionExpression: \"${3:String}\"",
+      "\t\tAuth: ${4:{\\}}",
+      "\t\tDefaultRouteSettings: ${5:{\\}}",
+      "\t\tDescription: \"${6:String}\"",
+      "\t\tDisableExecuteApiEndpoint: ${7:false}",
+      "\t\tDisableSchemaValidation: ${8:false}",
+      "\t\tDomain: ${9:{\\}}",
+      "\t\tIpAddressType: \"${10:String}\"",
+      "\t\tName: \"${11:String}\"",
+      "\t\tPropagateTags: ${12:false}",
+      "\t\tRoutes: ${13:{\\}} # Required",
+      "\t\tRouteSelectionExpression: \"${14:String}\" # Required",
+      "\t\tRouteSettings: ${15:{\\}}",
+      "\t\tStageName: \"${16:String}\"",
+      "\t\tStageVariables: ${17:{\\}}",
+      "\t\tTags: ${18:{\\}}",
+      "$0"
+    ],
+    "description": "Full AWS::Serverless::WebSocketApi property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-websocketapi.html",
     "scope": "yaml"
   }
 }

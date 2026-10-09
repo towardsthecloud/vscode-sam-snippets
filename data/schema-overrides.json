@@ -1,0 +1,16 @@
+{
+  "AWS::Serverless::Api": {
+    "OpenApiVersion": "string"
+  },
+  "AWS::Serverless::GraphQLApi": {
+    "IntrospectionConfig": "string",
+    "OwnerContact": "string",
+    "QueryDepthLimit": "integer",
+    "ResolverCountLimit": "integer",
+    "Visibility": "string"
+  },
+  "AWS::Serverless::StateMachine": {
+    "AutoPublishAlias": "string",
+    "DeploymentPreference": "object"
+  }
+}

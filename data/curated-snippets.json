@@ -1,0 +1,68 @@
+{
+  "SAM-template": {
+    "prefix": ["sam-template", "sam"],
+    "body": [
+      "AWSTemplateFormatVersion: '2010-09-09'",
+      "Transform: AWS::Serverless-2016-10-31",
+      "Description: ${1:Serverless application}",
+      "Resources:",
+      "\t${2:Function}:",
+      "\t\tType: AWS::Serverless::Function",
+      "\t\tProperties:",
+      "\t\t\tRuntime: python3.13",
+      "\t\t\tHandler: index.handler",
+      "\t\t\tInlineCode: |",
+      "\t\t\t\tdef handler(event, context):",
+      "\t\t\t\t\treturn {\"statusCode\": 200, \"body\": \"Hello\"}",
+      "$0"
+    ],
+    "description": "Minimal SAM template with an inline Lambda function.",
+    "scope": "yaml"
+  },
+  "SAM-function-zip": {
+    "prefix": "sam-function-zip",
+    "body": [
+      "${1:Function}:", "\tType: AWS::Serverless::Function", "\tProperties:",
+      "\t\tCodeUri: ${2:src/}", "\t\tHandler: ${3:app.handler}", "\t\tRuntime: ${4:python3.13}", "$0"
+    ],
+    "description": "Lambda function using local ZIP source code. Insert under Resources.",
+    "scope": "yaml"
+  },
+  "SAM-function-image": {
+    "prefix": "sam-function-image",
+    "body": [
+      "${1:Function}:", "\tType: AWS::Serverless::Function", "\tProperties:",
+      "\t\tPackageType: Image", "\t\tImageUri: ${2:123456789012.dkr.ecr.us-east-1.amazonaws.com/example:latest}", "$0"
+    ],
+    "description": "Lambda function using an ECR container image. Insert under Resources.",
+    "scope": "yaml"
+  },
+  "SAM-http-event": {
+    "prefix": "sam-http-event",
+    "body": [
+      "${1:ApiRequest}:", "\tType: HttpApi", "\tProperties:", "\t\tPath: ${2:/hello}", "\t\tMethod: ${3|get,post,put,patch,delete,options,head,any|}", "$0"
+    ],
+    "description": "HTTP API event. Insert under a Function's Events mapping.",
+    "scope": "yaml"
+  },
+  "SAM-parameter-string": {
+    "prefix": "sam-parameter-string",
+    "body": ["${1:Environment}:", "\tType: String", "\tDefault: ${2:dev}", "$0"],
+    "description": "String parameter. Insert under Parameters.", "scope": "yaml"
+  },
+  "SAM-parameter-number": {
+    "prefix": "sam-parameter-number",
+    "body": ["${1:MemorySize}:", "\tType: Number", "\tDefault: ${2:128}", "$0"],
+    "description": "Numeric parameter. Insert under Parameters.", "scope": "yaml"
+  },
+  "SAM-parameter-list": {
+    "prefix": "sam-parameter-list",
+    "body": ["${1:SubnetIds}:", "\tType: CommaDelimitedList", "\tDefault: '${2:subnet-12345678,subnet-87654321}'", "$0"],
+    "description": "Comma-delimited list parameter. Insert under Parameters.", "scope": "yaml"
+  },
+  "SAM-parameter-ssm": {
+    "prefix": "sam-parameter-ssm",
+    "body": ["${1:Configuration}:", "\tType: AWS::SSM::Parameter::Value<String>", "\tDefault: ${2:/application/configuration}", "$0"],
+    "description": "Systems Manager parameter reference. Insert under Parameters.", "scope": "yaml"
+  }
+}

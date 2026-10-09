@@ -36,3 +36,27 @@ If the maintainers notice anything that we'd like changed, we'll ask you to edit
 ## Licensing
 
 See the [LICENSE](https://github.com/towardsthecloud/vscode-sam-snippets/blob/main/LICENSE) file for our project's licensing. We will ask you to confirm the licensing of your contribution.
+
+## Development and validation
+
+Use Node 24 (`fnm use` reads `.nvmrc`), then run `npm ci --ignore-scripts`. Install the AWS SAM CLI through Homebrew (`brew install aws-sam-cli`), or use Python 3.13 and `python -m pip install -r requirements.txt` for the versions pinned in CI. SAM includes its own compatible CloudFormation Linter; the requirements pin that supported version rather than an independently installed newer linter.
+
+Run `npm test` from the repository root. It checks generated output, builds and inspects the VSIX, starts an isolated VS Code instance using the packaged extension, and validates completed examples with `sam validate --lint`. On Linux, use `xvfb-run -a npm test`. Tests use no AWS credentials and do not deploy resources. Reports, editor expansions, and completed examples remain in `.test-artifacts/`; CI retains them as artifacts. Use `VSCODE_TEST_VERSION=<version> npm run test:editor` to reproduce against a specific VS Code release after running the package checks.
+
+## Updating snippets
+
+`data/sam-resources.json` is a compact snapshot of the official AWS SAM schema, recording the source commit and SHA-256 digest. Run `npm run schema:update` and `npm run generate` to refresh it. To reproduce a snapshot, run `npm run schema:update -- <source-commit>`. The updater retains the existing commit when the resource definitions have not changed.
+
+Edit common templates in `data/curated-snippets.json` and property defaults in `data/resource-overrides.json`, then regenerate. `data/schema-overrides.json` supplies explicit types for incomplete upstream properties or documented schema mismatches. Review those hints against AWS documentation when upstream definitions change. Required annotations combine the schema's required list with explicit `Required: Yes` documentation. Unknown property shapes fail the update instead of silently producing an incorrect snippet.
+
+Intrinsic and condition snippets are maintained directly in their respective files. Keep placeholders editable, escape literal CloudFormation interpolation when needed, and preserve existing prefixes. The generated full resource snippets are property references; the short variants provide practical starting points. Do not add runtime extension code for build-time generation.
+
+The weekly Update SAM definitions workflow opens or updates `codex/update-sam-definitions` and explicitly dispatches Validate for that branch. It uses GITHUB_TOKEN and requires the repository setting allowing Actions to create pull requests. Review and merge the PR before including it in a release. Dependabot handles tooling and action updates separately.
+
+## Releasing
+
+Update `package.json`, its lockfile, and `CHANGELOG.md` together in a reviewed PR. Before tagging, replace the version's `Unreleased` heading with its release date in `YYYY-MM-DD` format. The release guard rejects unfinished notes. After merging the release preparation, tag that commit with the matching version, for example `git tag v1.20.0` followed by `git push origin v1.20.0`.
+
+The Release workflow checks the tag against the version and release notes, validates the extension, retains the tested VSIX for 30 days, and publishes that exact artifact independently to both registries. It uses the existing `VSCE_TOKEN` and `OPEN_VSX_TOKEN` secrets. A push to `main` validates changes without bumping versions or publishing.
+
+If a registry fails, choose **Re-run failed jobs** on the existing release run within the artifact retention period. Completed versions are skipped safely. If the artifact has expired, re-run all jobs for the same tag to rebuild and validate it. Do not bump the version to retry a failed registry.

@@ -1,115 +1,104 @@
-Changelog
-=========
+# Changelog
+
+## [1.20.0] - 2026-10-09
+
+- Fix Connector and GraphQL YAML shapes and condition operands.
+- Add all 13 current SAM resource types and generate property scaffolds from a pinned SAM schema.
+- Add small function, HTTP event, and parameter snippets while preserving existing prefixes.
+- Add editable placeholders to intrinsic and condition snippets, including newer intrinsic functions.
+- Validate the packaged VSIX in VS Code and lint completed examples with the SAM CLI.
+- Separate validation, reviewed schema updates, and tag-based publishing with retained artifacts and registry retries.
 
 
-(unreleased)
-------------
+## [1.19.0] - 2026-08-01
 - Docs: update readme tip. [Danny Steenman]
 
 
-1.18.0 (2026-04-29)
--------------------
+## 1.18.0 (2026-04-29)
 - Build: auto-update snippets to version: 1.18.0. [Github Actions]
 - Chore: remove badges from README and package.json. [Danny Steenman]
 
 
-1.17.0 (2025-12-05)
--------------------
+## 1.17.0 (2025-12-05)
 - Build: auto-update snippets to version: 1.17.0. [Github Actions]
 - Update README.md. [Danny Steenman]
 
 
-1.16.0 (2025-11-23)
--------------------
+## 1.16.0 (2025-11-23)
 - Build: auto-update snippets to version: 1.16.0. [Github Actions]
 - Update README.md. [Danny Steenman]
 
 
-1.15.0 (2025-09-18)
--------------------
+## 1.15.0 (2025-09-18)
 - Build: auto-update snippets to version: 1.15.0. [Github Actions]
 - Update README.md. [Danny Steenman]
 
 
-1.14.0 (2025-07-07)
--------------------
+## 1.14.0 (2025-07-07)
 - Build: auto-update snippets to version: 1.14.0. [Github Actions]
 - Update README.md. [Danny Steenman]
 - Ci(workflow): change trigger to push on main branch and retain manual
   dispatch. [Danny Steenman]
 
 
-1.13.0 (2025-07-04)
--------------------
+## 1.13.0 (2025-07-04)
 - Build: auto-update snippets to version: 1.13.0. [Github Actions]
 - Update README.md. [Danny Steenman]
 
 
-1.12.0 (2025-05-21)
--------------------
+## 1.12.0 (2025-05-21)
 - Build: auto-update snippets to version: 1.12.0. [Github Actions]
 - Chore: update readme. [Danny Steenman]
 
 
-1.11.0 (2025-05-15)
--------------------
+## 1.11.0 (2025-05-15)
 - Build: auto-update snippets to version: 1.11.0. [Github Actions]
 - Chore: update readme. [Danny Steenman]
 
 
-1.10.0 (2025-04-17)
--------------------
+## 1.10.0 (2025-04-17)
 - Build: auto-update snippets to version: 1.10.0. [Github Actions]
 - Chore: update repository links to reflect new ownership. [Danny
   Steenman]
 
 
-1.9.0 (2024-10-28)
-------------------
+## 1.9.0 (2024-10-28)
 - Build: auto-update snippets to version: 1.9.0. [Github Actions]
 - Ci(workflow): update action versions and node version. [Danny
   Steenman]
 - Chore: update .vscodeignore with new patterns. [Danny Steenman]
 
 
-1.8.0 (2024-10-25)
-------------------
+## 1.8.0 (2024-10-25)
 - Chore: update vscode extension icon. [Danny Steenman]
 
 
-1.7.0 (2024-06-27)
-------------------
+## 1.7.0 (2024-06-27)
 - Chore: Update README.md. [Danny Steenman]
 
 
-1.6.0 (2024-06-27)
-------------------
+## 1.6.0 (2024-06-27)
 - Chore: update README.md. [Danny Steenman]
 
 
-1.5.0 (2024-06-27)
-------------------
+## 1.5.0 (2024-06-27)
 - Feat: Update README.md and add contact information. [Danny Steenman]
 
 
-1.4.0 (2024-06-06)
-------------------
+## 1.4.0 (2024-06-06)
 - Feat: rename display name. [Danny Steenman]
 
 
-1.3.0 (2024-05-28)
-------------------
+## 1.3.0 (2024-05-28)
 - Feat: add openvsx badge. [Danny Steenman]
 - Chore: update package.json. [Danny Steenman]
 
 
-1.2.0 (2024-04-13)
-------------------
+## 1.2.0 (2024-04-13)
 - Feat: improve readme. [Danny Steenman]
 
 
-1.1.0 (2024-04-13)
-------------------
+## 1.1.0 (2024-04-13)
 - Feat: add README.md and github publish workflow. [Danny Steenman]
 - Feat: add bug report, feature request, and pull request templates.
   [Danny Steenman]
