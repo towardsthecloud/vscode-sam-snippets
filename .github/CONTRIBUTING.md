@@ -39,7 +39,7 @@ See the [LICENSE](https://github.com/towardsthecloud/vscode-sam-snippets/blob/ma
 
 ## Development and validation
 
-Use Node 24 (`fnm use` reads `.nvmrc`), then run `npm ci --ignore-scripts`. Install the AWS SAM CLI and CloudFormation Linter through Homebrew (`brew install aws-sam-cli cfn-lint`), or use Python 3.13 and `python -m pip install -r requirements.txt` for the versions pinned in CI.
+Use Node 24 (`fnm use` reads `.nvmrc`), then run `npm ci --ignore-scripts`. Install the AWS SAM CLI through Homebrew (`brew install aws-sam-cli`), or use Python 3.13 and `python -m pip install -r requirements.txt` for the versions pinned in CI. SAM includes its own compatible CloudFormation Linter; the requirements pin that supported version rather than an independently installed newer linter.
 
 Run `npm test` from the repository root. It checks generated output, builds and inspects the VSIX, starts an isolated VS Code instance using the packaged extension, and validates completed examples with `sam validate --lint`. On Linux, use `xvfb-run -a npm test`. Tests use no AWS credentials and do not deploy resources. Reports, editor expansions, and completed examples remain in `.test-artifacts/`; CI retains them as artifacts. Use `VSCODE_TEST_VERSION=<version> npm run test:editor` to reproduce against a specific VS Code release after running the package checks.
 
