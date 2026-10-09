@@ -1,0 +1,52 @@
+name: Release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+concurrency:
+  group: sam-snippets-release
+  cancel-in-progress: false
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+      - run: node scripts/check-release.mjs
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+  validate:
+    needs: version
+    uses: ./.github/workflows/validate.yml
+  publish:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        registry: [marketplace, open-vsx]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: sam-snippets-vsix
+          path: .test-artifacts
+      - name: Publish the tested VSIX to Visual Studio Marketplace
+        if: matrix.registry == 'marketplace'
+        run: npm exec -- vsce publish --packagePath .test-artifacts/sam-snippets.vsix --skip-duplicate
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_TOKEN }}
+      - name: Publish the tested VSIX to Open VSX
+        if: matrix.registry == 'open-vsx'
+        run: npm exec -- ovsx publish .test-artifacts/sam-snippets.vsix --skip-duplicate
+        env:
+          OVSX_PAT: ${{ secrets.OPEN_VSX_TOKEN }}

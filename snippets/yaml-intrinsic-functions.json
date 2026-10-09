@@ -1,74 +1,156 @@
 {
   "Fn::Base64": {
-    "prefix": "base64",
-    "body": "!Base64 valueToEncode",
+    "prefix": [
+      "base64",
+      "sam-base64"
+    ],
+    "body": "!Base64 '${1:Value}'$0",
     "description": "The intrinsic function Fn::Base64 returns the Base64 representation of the input string. This function is typically used to pass encoded data to Amazon EC2 instances by way of the UserData property.",
     "scope": "yaml"
   },
   "Fn::Cidr": {
-    "prefix": "cidr",
-    "body": "!Cidr [ ipBlock, count, cidrBits ]",
+    "prefix": [
+      "cidr",
+      "sam-cidr"
+    ],
+    "body": "!Cidr [${1:10.0.0.0/16}, ${2:4}, ${3:8}]$0",
     "description": "The intrinsic function Fn::Cidr returns an array of CIDR address blocks. The number of CIDR blocks returned is dependent on the count parameter.",
     "scope": "yaml"
   },
   "Fn::FindInMap": {
-    "prefix": "find-in-map",
-    "body": "!FindInMap [ MappingName, keyname, value ]",
+    "prefix": [
+      "find-in-map",
+      "sam-find-in-map"
+    ],
+    "body": "!FindInMap [${1:MappingName}, ${2:TopLevelKey}, ${3:SecondLevelKey}]$0",
     "description": "The intrinsic function Fn::FindInMap returns the value corresponding to keys in a two-level map that is declared in the Mappings section.",
     "scope": "yaml"
   },
   "Fn::GetAtt": {
-    "prefix": "get-att",
-    "body": "!GetAtt logicalNameOfResource.attributeName",
+    "prefix": [
+      "get-att",
+      "sam-get-att"
+    ],
+    "body": "!GetAtt ${1:Resource}.${2:Arn}$0",
     "description": "The Fn::GetAtt intrinsic function returns the value of an attribute from a resource in the template.",
     "scope": "yaml"
   },
   "Fn::GetAZs": {
-    "prefix": "get-azs",
-    "body": "!GetAZs region",
+    "prefix": [
+      "get-azs",
+      "sam-get-azs"
+    ],
+    "body": "!GetAZs '${1:us-east-1}'$0",
     "description": "The intrinsic function Fn::GetAZs returns an array that lists Availability Zones for a specified region",
     "scope": "yaml"
   },
   "Fn::ImportValue": {
-    "prefix": "import-value",
-    "body": "!ImportValue sharedValueToImport",
+    "prefix": [
+      "import-value",
+      "sam-import-value"
+    ],
+    "body": "!ImportValue ${1:ExportName}$0",
     "description": "The intrinsic function Fn::ImportValue returns the value of an output exported by another stack.",
     "scope": "yaml"
   },
   "Fn::Join": {
-    "prefix": "join",
-    "body": "!Join [ delimiter, [ comma-delimited list of values ] ]",
+    "prefix": [
+      "join",
+      "sam-join"
+    ],
+    "body": "!Join ['${1:-}', [${2:First}, ${3:Second}]]$0",
     "description": "The intrinsic function Fn::Join appends a set of values into a single value, separated by the specified delimiter.",
     "scope": "yaml"
   },
   "Fn::Select": {
-    "prefix": "select",
-    "body": "!Select [ index, listOfObjects ]",
+    "prefix": [
+      "select",
+      "sam-select"
+    ],
+    "body": "!Select [${1:0}, [${2:First}, ${3:Second}]]$0",
     "description": "The intrinsic function Fn::Select returns a single object from a list of objects by index.",
     "scope": "yaml"
   },
   "Fn::Split": {
-    "prefix": "split",
-    "body": "!Split [ delimiter, source string ]",
+    "prefix": [
+      "split",
+      "sam-split"
+    ],
+    "body": "!Split ['${1:,}', '${2:First,Second}']$0",
     "description": "To split a string into a list of string values so that you can select an element from the resulting string list, use the Fn::Split intrinsic function.",
     "scope": "yaml"
   },
   "Fn::Sub": {
-    "prefix": "sub",
-    "body": "!Sub String",
+    "prefix": [
+      "sub",
+      "sam-sub"
+    ],
+    "body": "!Sub '${1:Value}'$0",
     "description": "The intrinsic function Fn::Sub substitutes variables in an input string with values that you specify.",
     "scope": "yaml"
   },
   "Fn::Transform": {
-    "prefix": "transform",
-    "body": "!Transform { 'Name' : macro name, 'Parameters' : {key : value, ... } }",
+    "prefix": [
+      "transform",
+      "sam-transform"
+    ],
+    "body": [
+      "Fn::Transform:",
+      "\tName: ${1:MacroName}",
+      "\tParameters:",
+      "\t\t${2:Key}: ${3:Value}",
+      "$0"
+    ],
     "description": "The intrinsic function Fn::Transform specifies a macro to perform custom processing on part of a stack template.",
     "scope": "yaml"
   },
   "Ref": {
-    "prefix": "ref",
-    "body": "!Ref logicalName",
+    "prefix": [
+      "ref",
+      "sam-ref"
+    ],
+    "body": "!Ref ${1:Resource}$0",
     "description": "The intrinsic function Ref returns the value of the specified parameter or resource.",
+    "scope": "yaml"
+  },
+  "Fn::Length": {
+    "prefix": "sam-length",
+    "body": "Fn::Length: [${1:First}, ${2:Second}]$0",
+    "description": "Count collection items. Requires AWS::LanguageExtensions.",
+    "scope": "yaml"
+  },
+  "Fn::ToJsonString": {
+    "prefix": "sam-to-json-string",
+    "body": [
+      "Fn::ToJsonString:",
+      "\t${1:Key}: ${2:Value}",
+      "$0"
+    ],
+    "description": "Convert an object to JSON. Requires AWS::LanguageExtensions.",
+    "scope": "yaml"
+  },
+  "Fn::ForEach": {
+    "prefix": "sam-for-each",
+    "body": [
+      "\"Fn::ForEach::${1:LoopName}\":",
+      "\t- ${2:Identifier}",
+      "\t- [${3:First}, ${4:Second}]",
+      "\t- \"\\${${2:Identifier}\\}\":",
+      "\t\tType: ${5:AWS::Serverless::SimpleTable}",
+      "$0"
+    ],
+    "description": "Repeat a resource for each collection item. Requires AWS::LanguageExtensions before the SAM transform.",
+    "scope": "yaml"
+  },
+  "Fn::GetStackOutput": {
+    "prefix": "sam-get-stack-output",
+    "body": [
+      "Fn::GetStackOutput:",
+      "\tStackName: ${1:ProducerStack}",
+      "\tOutputName: ${2:OutputName}",
+      "$0"
+    ],
+    "description": "Read an output from another stack. Insert as a resource property value.",
     "scope": "yaml"
   }
 }

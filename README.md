@@ -1,6 +1,6 @@
 # AWS Serverless Application Model (SAM) Snippets for VS Code
 
-This extension adds YAML snippets for **all** [AWS Serverless Application Model (SAM) resources](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-resources-and-properties.html) into Visual Studio Code.
+YAML snippets for [AWS Serverless Application Model (SAM) resources](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-specification-resources-and-properties.html), common Lambda configurations, parameters, conditions, and intrinsic functions in Visual Studio Code.
 
 <!-- TIP-LIST:START -->
 > [!TIP]
@@ -37,29 +37,45 @@ This extension adds YAML snippets for **all** [AWS Serverless Application Model 
 ```YAML
     AWS::Serverless::Api
     AWS::Serverless::Application
+    AWS::Serverless::CapacityProvider
     AWS::Serverless::Connector
     AWS::Serverless::Function
     AWS::Serverless::GraphQLApi
     AWS::Serverless::HttpApi
     AWS::Serverless::LayerVersion
+    AWS::Serverless::MicrovmImage
+    AWS::Serverless::NetworkConnector
     AWS::Serverless::SimpleTable
     AWS::Serverless::StateMachine
+    AWS::Serverless::WebSocketApi
 ```
 
-2. Includes intrinsic functions, conditions, and a variety of parameter types.
-3. Utilizes placeholders for quick navigation within the properties of each resource.
-4. Provides documentation links for each resource.
+2. Includes editable intrinsic functions and conditions, plus String, Number, CommaDelimitedList, and SSM parameter snippets.
+3. Adds short templates for ZIP functions, image functions, and HTTP API events.
+4. Generates full resource property scaffolds from a pinned AWS SAM schema, with documentation links and required-property annotations.
 5. Available on the [Open VSX Registry](https://open-vsx.org/extension/dannysteenman/sam-snippets) for Gitpod support.
 
 ## Usage
 
-* **Step 1.** Install this extension
-* **Step 2.** create a `.yml` file to start working on your AWS SAM project.
-* **Step 3.** Check in the bottom right-hand corner of the VS Code editor that the file type is listed as "YAML".
-* **Step 4.** To start with the basic template structure, type `sam` to get the YAML formatted template fragment.
-* **Step 5.** Start adding resources in the resource section by using their prefix name e.g. ```serverless-api``` equals resource type ```AWS::Serverless::Api```
+Open a `.yaml` or `.yml` file and select **YAML** as its language mode. Type a prefix and choose its completion, or press `Ctrl+Space` to open suggestions. Use `Tab` and `Shift+Tab` to move between placeholders.
 
-> **Note:** Once you start typing a prefix (explained in step 5), the corresponding snippet will show up in the dropdown menu. If this doesn't happen automatically, press `ctrl + space` to invoke IntelliSense and search for the prefix of the resource type that you want to add (as listed in step 5).
+| Prefix | Inserts | Placement |
+| --- | --- | --- |
+| `sam` or `sam-template` | Minimal SAM template with an inline Lambda function | Empty file |
+| `sam-function-zip` | Function using local source code | `Resources` |
+| `sam-function-image` | Function using an ECR image | `Resources` |
+| `sam-http-event` | HTTP API event | Function `Events` |
+| `sam-parameter-string` | String parameter | `Parameters` |
+| `sam-parameter-number` | Numeric parameter | `Parameters` |
+| `sam-parameter-list` | Comma-delimited list parameter | `Parameters` |
+| `sam-parameter-ssm` | SSM parameter reference | `Parameters` |
+| `serverless-function` or `serverless-function-full` | Full Function property scaffold | `Resources` |
+
+Other resource prefixes use the same pattern, such as `serverless-api` and `serverless-connector`. Existing resource, condition, and intrinsic prefixes are preserved; conditions and intrinsics also have `sam-` aliases.
+
+Full property scaffolds include optional and alternative settings. Remove unused properties and fill in their values before deployment. For example, use the ZIP or image variant to avoid mixing `CodeUri`, `InlineCode`, and `ImageUri`. Snippets respect the editor's indentation settings.
+
+`sam-length`, `sam-to-json-string`, and `sam-for-each` require `AWS::LanguageExtensions`. When combining it with SAM, list `AWS::LanguageExtensions` before `AWS::Serverless-2016-10-31` in `Transform`. `sam-get-stack-output` inserts the long form of `Fn::GetStackOutput` for resource property values.
 
 ---
 ## AWS CloudFormation Snippets for VS Code

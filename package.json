@@ -3,7 +3,7 @@
   "displayName": "AWS Serverless Application Model (SAM) Snippets",
   "description": "Adds snippets for all the AWS Serverless Application Model (SAM) resources in VS Code.",
   "author": "Danny Steenman",
-  "version": "1.19.0",
+  "version": "1.20.0",
   "publisher": "dannysteenman",
   "icon": "images/sam-snippets-extension-icon.png",
   "homepage": "https://towardsthecloud.com",
@@ -29,6 +29,34 @@
     "template",
     "yml"
   ],
+  "scripts": {
+    "test": "npm run generate:check && npm run package && npm run test:package && npm run test:editor && npm run test:templates",
+    "test:editor": "node scripts/test-editor.mjs",
+    "generate": "node scripts/generate.mjs",
+    "generate:check": "node scripts/generate.mjs --check",
+    "schema:update": "node scripts/update-schema.mjs",
+    "test:templates": "node scripts/validate-templates.mjs",
+    "package": "node -e \"require('node:fs').mkdirSync('.test-artifacts', {recursive: true})\" && vsce package --no-dependencies --out .test-artifacts/sam-snippets.vsix",
+    "test:package": "node scripts/validate-package.mjs"
+  },
+  "files": [
+    "snippets/*.json",
+    "images/sam-snippets-extension-icon.png",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "overrides": {
+    "ovsx": {
+      "@vscode/vsce": "$@vscode/vsce"
+    }
+  },
+  "devDependencies": {
+    "@vscode/test-electron": "3.1.0",
+    "@vscode/vsce": "4.0.0",
+    "ovsx": "1.2.0",
+    "yaml": "2.9.1"
+  },
   "contributes": {
     "snippets": [
       {

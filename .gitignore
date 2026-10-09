@@ -2,9 +2,8 @@
 .mypy_cache
 .python-version
 
-# Ignore everything in the test folder
-/test/*
-
-# But don't ignore these files
-!test/complete-resource-specification.json
-!test/short-resource-specification.json
+node_modules/
+.vscode-test/
+.test-artifacts/
+.venv/
+__pycache__/

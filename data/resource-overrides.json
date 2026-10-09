@@ -1,0 +1,10 @@
+{
+  "AWS::Serverless::Connector": {
+    "Destination": { "Id": "Table" },
+    "Permissions": ["Read"],
+    "Source": { "Id": "Function" }
+  },
+  "AWS::Serverless::GraphQLApi": {
+    "Auth": { "Type": "AWS_IAM" }
+  }
+}

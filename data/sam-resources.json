@@ -1,0 +1,883 @@
+{
+  "source": {
+    "commit": "49bac2e98b0a67bd96e2c83841bb02afda699255",
+    "url": "https://raw.githubusercontent.com/aws/serverless-application-model/49bac2e98b0a67bd96e2c83841bb02afda699255/samtranslator/schema/schema.json",
+    "sha256": "f99ac99a4b4106b96ae2f30f59f5c63b795bd1416b953e2e8865e75d376e6401"
+  },
+  "resources": {
+    "AWS::Serverless::Api": {
+      "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-api.html",
+      "properties": {
+        "AccessLogSetting": {
+          "type": "object",
+          "required": false
+        },
+        "AlwaysDeploy": {
+          "type": "boolean",
+          "required": false
+        },
+        "ApiKeySourceType": {
+          "type": "string",
+          "required": false
+        },
+        "Auth": {
+          "type": "object",
+          "required": false
+        },
+        "BinaryMediaTypes": {
+          "type": "array",
+          "required": false
+        },
+        "CacheClusterEnabled": {
+          "type": "boolean",
+          "required": false
+        },
+        "CacheClusterSize": {
+          "type": "string",
+          "required": false
+        },
+        "CanarySetting": {
+          "type": "object",
+          "required": false
+        },
+        "Cors": {
+          "type": "string",
+          "required": false
+        },
+        "DefinitionBody": {
+          "type": "object",
+          "required": false
+        },
+        "DefinitionUri": {
+          "type": "string",
+          "required": false
+        },
+        "Description": {
+          "type": "string",
+          "required": false
+        },
+        "DisableExecuteApiEndpoint": {
+          "type": "boolean",
+          "required": false
+        },
+        "Domain": {
+          "type": "object",
+          "required": false
+        },
+        "EndpointAccessMode": {
+          "type": "string",
+          "required": false
+        },
+        "EndpointConfiguration": {
+          "type": "object",
+          "required": false
+        },
+        "FailOnWarnings": {
+          "type": "boolean",
+          "required": false
+        },
+        "GatewayResponses": {
+          "type": "object",
+          "required": false
+        },
+        "MergeDefinitions": {
+          "type": "boolean",
+          "required": false
+        },
+        "MethodSettings": {
+          "type": "array",
+          "required": false
+        },
+        "MinimumCompressionSize": {
+          "type": "number",
+          "required": false
+        },
+        "Mode": {
+          "type": "string",
+          "required": false
+        },
+        "Models": {
+          "type": "object",
+          "required": false
+        },
+        "Name": {
+          "type": "string",
+          "required": false
+        },
+        "OpenApiVersion": {
+          "type": "number",
+          "required": false
+        },
+        "Policy": {
+          "type": "object",
+          "required": false
+        },
+        "PropagateTags": {
+          "type": "boolean",
+          "required": false
+        },
+        "SecurityPolicy": {
+          "type": "string",
+          "required": false
+        },
+        "StageName": {
+          "type": "string",
+          "required": true
+        },
+        "Tags": {
+          "type": "object",
+          "required": false
+        },
+        "TracingEnabled": {
+          "type": "boolean",
+          "required": false
+        },
+        "Variables": {
+          "type": "object",
+          "required": false
+        }
+      }
+    },
+    "AWS::Serverless::Application": {
+      "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-application.html",
+      "properties": {
+        "Location": {
+          "type": "string",
+          "required": true
+        },
+        "NotificationARNs": {
+          "type": "array",
+          "required": false
+        },
+        "Parameters": {
+          "type": "object",
+          "required": false
+        },
+        "Tags": {
+          "type": "object",
+          "required": false
+        },
+        "TimeoutInMinutes": {
+          "type": "number",
+          "required": false
+        }
+      }
+    },
+    "AWS::Serverless::CapacityProvider": {
+      "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-capacityprovider.html",
+      "properties": {
+        "CapacityProviderName": {
+          "type": "string",
+          "required": false
+        },
+        "InstanceRequirements": {
+          "type": "object",
+          "required": false
+        },
+        "KmsKeyArn": {
+          "type": "string",
+          "required": false
+        },
+        "LoggingConfig": {
+          "type": "object",
+          "required": false
+        },
+        "ManagedResourceTags": {
+          "type": "object",
+          "required": false
+        },
+        "OperatorRole": {
+          "type": "string",
+          "required": false
+        },
+        "PropagateTags": {
+          "type": "boolean",
+          "required": false
+        },
+        "ScalingConfig": {
+          "type": "object",
+          "required": false
+        },
+        "Tags": {
+          "type": "object",
+          "required": false
+        },
+        "VpcConfig": {
+          "type": "object",
+          "required": true
+        }
+      }
+    },
+    "AWS::Serverless::Connector": {
+      "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-connector.html",
+      "properties": {
+        "Destination": {
+          "type": "object",
+          "required": true
+        },
+        "Permissions": {
+          "type": "array",
+          "required": true
+        },
+        "Source": {
+          "type": "object",
+          "required": true
+        }
+      }
+    },
+    "AWS::Serverless::Function": {
+      "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html",
+      "properties": {
+        "Architectures": {
+          "type": "array",
+          "required": false
+        },
+        "AssumeRolePolicyDocument": {
+          "type": "object",
+          "required": false
+        },
+        "AutoPublishAlias": {
+          "type": "string",
+          "required": false
+        },
+        "AutoPublishAliasAllProperties": {
+          "type": "boolean",
+          "required": false
+        },
+        "AutoPublishCodeSha256": {
+          "type": "string",
+          "required": false
+        },
+        "CapacityProviderConfig": {
+          "type": "object",
+          "required": false
+        },
+        "CodeSigningConfigArn": {
+          "type": "string",
+          "required": false
+        },
+        "CodeUri": {
+          "type": "string",
+          "required": false
+        },
+        "DeadLetterQueue": {
+          "type": "object",
+          "required": false
+        },
+        "DeploymentPreference": {
+          "type": "object",
+          "required": false
+        },
+        "Description": {
+          "type": "string",
+          "required": false
+        },
+        "DurableConfig": {
+          "type": "object",
+          "required": false
+        },
+        "Environment": {
+          "type": "object",
+          "required": false
+        },
+        "EphemeralStorage": {
+          "type": "object",
+          "required": false
+        },
+        "EventInvokeConfig": {
+          "type": "object",
+          "required": false
+        },
+        "Events": {
+          "type": "object",
+          "required": false
+        },
+        "FileSystemConfigs": {
+          "type": "array",
+          "required": false
+        },
+        "FunctionName": {
+          "type": "string",
+          "required": false
+        },
+        "FunctionScalingConfig": {
+          "type": "object",
+          "required": false
+        },
+        "FunctionUrlConfig": {
+          "type": "object",
+          "required": false
+        },
+        "Handler": {
+          "type": "string",
+          "required": false
+        },
+        "ImageConfig": {
+          "type": "object",
+          "required": false
+        },
+        "ImageUri": {
+          "type": "string",
+          "required": false
+        },
+        "InlineCode": {
+          "type": "string",
+          "required": false
+        },
+        "KmsKeyArn": {
+          "type": "string",
+          "required": false
+        },
+        "Layers": {
+          "type": "array",
+          "required": false
+        },
+        "LoggingConfig": {
+          "type": "object",
+          "required": false
+        },
+        "MemorySize": {
+          "type": "integer",
+          "required": false
+        },
+        "PackageType": {
+          "type": "string",
+          "required": false
+        },
+        "PermissionsBoundary": {
+          "type": "string",
+          "required": false
+        },
+        "Policies": {
+          "type": "string",
+          "required": false
+        },
+        "PropagateTags": {
+          "type": "boolean",
+          "required": false
+        },
+        "ProvisionedConcurrencyConfig": {
+          "type": "object",
+          "required": false
+        },
+        "PublishToLatestPublished": {
+          "type": "boolean",
+          "required": false
+        },
+        "RecursiveLoop": {
+          "type": "string",
+          "required": false
+        },
+        "ReservedConcurrentExecutions": {
+          "type": "integer",
+          "required": false
+        },
+        "Role": {
+          "type": "string",
+          "required": false
+        },
+        "RolePath": {
+          "type": "string",
+          "required": false
+        },
+        "Runtime": {
+          "type": "string",
+          "required": false
+        },
+        "RuntimeManagementConfig": {
+          "type": "object",
+          "required": false
+        },
+        "SnapStart": {
+          "type": "object",
+          "required": false
+        },
+        "SourceKMSKeyArn": {
+          "type": "string",
+          "required": false
+        },
+        "Tags": {
+          "type": "object",
+          "required": false
+        },
+        "TenancyConfig": {
+          "type": "object",
+          "required": false
+        },
+        "Timeout": {
+          "type": "integer",
+          "required": false
+        },
+        "Tracing": {
+          "type": "string",
+          "required": false,
+          "choices": [
+            "Active",
+            "PassThrough",
+            "Disabled"
+          ]
+        },
+        "VersionDeletionPolicy": {
+          "type": "string",
+          "required": false
+        },
+        "VersionDescription": {
+          "type": "string",
+          "required": false
+        },
+        "VpcConfig": {
+          "type": "object",
+          "required": false
+        }
+      }
+    },
+    "AWS::Serverless::GraphQLApi": {
+      "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-graphqlapi.html",
+      "properties": {
+        "ApiKeys": {
+          "type": "object",
+          "required": false
+        },
+        "Auth": {
+          "type": "object",
+          "required": true
+        },
+        "Cache": {
+          "type": "object",
+          "required": false
+        },
+        "DataSources": {
+          "type": "object",
+          "required": false
+        },
+        "DomainName": {
+          "type": "object",
+          "required": false
+        },
+        "Functions": {
+          "type": "object",
+          "required": false
+        },
+        "IntrospectionConfig": {
+          "type": "string",
+          "required": false
+        },
+        "Logging": {
+          "type": "object",
+          "required": false
+        },
+        "Name": {
+          "type": "string",
+          "required": false
+        },
+        "OwnerContact": {
+          "type": "string",
+          "required": false
+        },
+        "QueryDepthLimit": {
+          "type": "integer",
+          "required": false
+        },
+        "ResolverCountLimit": {
+          "type": "integer",
+          "required": false
+        },
+        "Resolvers": {
+          "type": "object",
+          "required": false
+        },
+        "SchemaInline": {
+          "type": "string",
+          "required": false
+        },
+        "SchemaUri": {
+          "type": "string",
+          "required": false
+        },
+        "Tags": {
+          "type": "object",
+          "required": false
+        },
+        "Visibility": {
+          "type": "string",
+          "required": false
+        },
+        "XrayEnabled": {
+          "type": "boolean",
+          "required": false
+        }
+      }
+    },
+    "AWS::Serverless::HttpApi": {
+      "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-httpapi.html",
+      "properties": {
+        "AccessLogSettings": {
+          "type": "object",
+          "required": false
+        },
+        "Auth": {
+          "type": "object",
+          "required": false
+        },
+        "CorsConfiguration": {
+          "type": "string",
+          "required": false
+        },
+        "DefaultRouteSettings": {
+          "type": "object",
+          "required": false
+        },
+        "DefinitionBody": {
+          "type": "object",
+          "required": false
+        },
+        "DefinitionUri": {
+          "type": "string",
+          "required": false
+        },
+        "Description": {
+          "type": "string",
+          "required": false
+        },
+        "DisableExecuteApiEndpoint": {
+          "type": "boolean",
+          "required": false
+        },
+        "Domain": {
+          "type": "object",
+          "required": false
+        },
+        "FailOnWarnings": {
+          "type": "boolean",
+          "required": false
+        },
+        "Name": {
+          "type": "string",
+          "required": false
+        },
+        "PropagateTags": {
+          "type": "boolean",
+          "required": false
+        },
+        "RouteSettings": {
+          "type": "object",
+          "required": false
+        },
+        "StageName": {
+          "type": "string",
+          "required": false
+        },
+        "StageVariables": {
+          "type": "object",
+          "required": false
+        },
+        "Tags": {
+          "type": "object",
+          "required": false
+        }
+      }
+    },
+    "AWS::Serverless::LayerVersion": {
+      "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-layerversion.html",
+      "properties": {
+        "CompatibleArchitectures": {
+          "type": "array",
+          "required": false
+        },
+        "CompatibleRuntimes": {
+          "type": "array",
+          "required": false
+        },
+        "ContentUri": {
+          "type": "string",
+          "required": true
+        },
+        "Description": {
+          "type": "string",
+          "required": false
+        },
+        "LayerName": {
+          "type": "string",
+          "required": false
+        },
+        "LicenseInfo": {
+          "type": "string",
+          "required": false
+        },
+        "PublishLambdaVersion": {
+          "type": "boolean",
+          "required": false
+        },
+        "RetentionPolicy": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    "AWS::Serverless::MicrovmImage": {
+      "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-microvmimage.html",
+      "properties": {
+        "AdditionalOsCapabilities": {
+          "type": "array",
+          "required": false
+        },
+        "BaseImageArn": {
+          "type": "string",
+          "required": true
+        },
+        "BaseImageVersion": {
+          "type": "string",
+          "required": true
+        },
+        "BuildRoleArn": {
+          "type": "string",
+          "required": false
+        },
+        "CodeUri": {
+          "type": "string",
+          "required": true
+        },
+        "CpuConfigurations": {
+          "type": "array",
+          "required": false
+        },
+        "Description": {
+          "type": "string",
+          "required": false
+        },
+        "EgressNetworkConnectors": {
+          "type": "array",
+          "required": false
+        },
+        "EnvironmentVariables": {
+          "type": "object",
+          "required": false
+        },
+        "Hooks": {
+          "type": "object",
+          "required": false
+        },
+        "Logging": {
+          "type": "object",
+          "required": false
+        },
+        "Name": {
+          "type": "string",
+          "required": true
+        },
+        "PropagateTags": {
+          "type": "boolean",
+          "required": false
+        },
+        "Resources": {
+          "type": "array",
+          "required": false
+        },
+        "Tags": {
+          "type": "object",
+          "required": false
+        }
+      }
+    },
+    "AWS::Serverless::NetworkConnector": {
+      "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-networkconnector.html",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "required": false
+        },
+        "OperatorRole": {
+          "type": "string",
+          "required": false
+        },
+        "PropagateTags": {
+          "type": "boolean",
+          "required": false
+        },
+        "Tags": {
+          "type": "object",
+          "required": false
+        },
+        "VpcConfig": {
+          "type": "object",
+          "required": true
+        }
+      }
+    },
+    "AWS::Serverless::SimpleTable": {
+      "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-simpletable.html",
+      "properties": {
+        "PointInTimeRecoverySpecification": {
+          "type": "object",
+          "required": false
+        },
+        "PrimaryKey": {
+          "type": "object",
+          "required": false
+        },
+        "ProvisionedThroughput": {
+          "type": "object",
+          "required": false
+        },
+        "SSESpecification": {
+          "type": "object",
+          "required": false
+        },
+        "TableName": {
+          "type": "string",
+          "required": false
+        },
+        "Tags": {
+          "type": "object",
+          "required": false
+        }
+      }
+    },
+    "AWS::Serverless::StateMachine": {
+      "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-statemachine.html",
+      "properties": {
+        "AutoPublishAlias": {
+          "type": "string",
+          "required": false
+        },
+        "Definition": {
+          "type": "object",
+          "required": false
+        },
+        "DefinitionSubstitutions": {
+          "type": "object",
+          "required": false
+        },
+        "DefinitionUri": {
+          "type": "string",
+          "required": false
+        },
+        "DeploymentPreference": {
+          "type": "object",
+          "required": false
+        },
+        "Events": {
+          "type": "object",
+          "required": false
+        },
+        "Logging": {
+          "type": "object",
+          "required": false
+        },
+        "Name": {
+          "type": "string",
+          "required": false
+        },
+        "PermissionsBoundary": {
+          "type": "string",
+          "required": false
+        },
+        "Policies": {
+          "type": "string",
+          "required": false
+        },
+        "PropagateTags": {
+          "type": "boolean",
+          "required": false
+        },
+        "Role": {
+          "type": "string",
+          "required": false
+        },
+        "RolePath": {
+          "type": "string",
+          "required": false
+        },
+        "Tags": {
+          "type": "object",
+          "required": false
+        },
+        "Tracing": {
+          "type": "object",
+          "required": false
+        },
+        "Type": {
+          "type": "string",
+          "required": false
+        },
+        "UseAliasAsEventTarget": {
+          "type": "boolean",
+          "required": false
+        }
+      }
+    },
+    "AWS::Serverless::WebSocketApi": {
+      "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-websocketapi.html",
+      "properties": {
+        "AccessLogSettings": {
+          "type": "object",
+          "required": false
+        },
+        "ApiKeySelectionExpression": {
+          "type": "string",
+          "required": false
+        },
+        "Auth": {
+          "type": "object",
+          "required": false
+        },
+        "DefaultRouteSettings": {
+          "type": "object",
+          "required": false
+        },
+        "Description": {
+          "type": "string",
+          "required": false
+        },
+        "DisableExecuteApiEndpoint": {
+          "type": "boolean",
+          "required": false
+        },
+        "DisableSchemaValidation": {
+          "type": "boolean",
+          "required": false
+        },
+        "Domain": {
+          "type": "object",
+          "required": false
+        },
+        "IpAddressType": {
+          "type": "string",
+          "required": false
+        },
+        "Name": {
+          "type": "string",
+          "required": false
+        },
+        "PropagateTags": {
+          "type": "boolean",
+          "required": false
+        },
+        "Routes": {
+          "type": "object",
+          "required": true
+        },
+        "RouteSelectionExpression": {
+          "type": "string",
+          "required": true
+        },
+        "RouteSettings": {
+          "type": "object",
+          "required": false
+        },
+        "StageName": {
+          "type": "string",
+          "required": false
+        },
+        "StageVariables": {
+          "type": "object",
+          "required": false
+        },
+        "Tags": {
+          "type": "object",
+          "required": false
+        }
+      }
+    }
+  }
+}
