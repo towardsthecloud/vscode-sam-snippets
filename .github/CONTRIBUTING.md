@@ -47,7 +47,7 @@ Run `npm test` from the repository root. It checks generated output, builds and 
 
 `data/sam-resources.json` is a compact snapshot of the official AWS SAM schema, recording the source commit and SHA-256 digest. Run `npm run schema:update` and `npm run generate` to refresh it. To reproduce a snapshot, run `npm run schema:update -- <source-commit>`. The updater retains the existing commit when the resource definitions have not changed.
 
-Edit common templates in `data/curated-snippets.json` and property defaults in `data/resource-overrides.json`, then regenerate. `data/schema-overrides.json` supplies types only for upstream properties that lack both a schema type and documentation. Review those hints against AWS documentation when upstream definitions change. Unknown property shapes fail the update instead of silently producing an incorrect snippet.
+Edit common templates in `data/curated-snippets.json` and property defaults in `data/resource-overrides.json`, then regenerate. `data/schema-overrides.json` supplies explicit types for incomplete upstream properties or documented schema mismatches. Review those hints against AWS documentation when upstream definitions change. Required annotations combine the schema's required list with explicit `Required: Yes` documentation. Unknown property shapes fail the update instead of silently producing an incorrect snippet.
 
 Intrinsic and condition snippets are maintained directly in their respective files. Keep placeholders editable, escape literal CloudFormation interpolation when needed, and preserve existing prefixes. The generated full resource snippets are property references; the short variants provide practical starting points. Do not add runtime extension code for build-time generation.
 
@@ -55,7 +55,7 @@ The weekly Update SAM definitions workflow opens or updates `codex/update-sam-de
 
 ## Releasing
 
-Update `package.json`, its lockfile, and `CHANGELOG.md` together in a reviewed PR. After merging, tag that commit with the matching version, for example `git tag v1.20.0` followed by `git push origin v1.20.0`.
+Update `package.json`, its lockfile, and `CHANGELOG.md` together in a reviewed PR. Before tagging, replace the version's `Unreleased` heading with its release date in `YYYY-MM-DD` format. The release guard rejects unfinished notes. After merging the release preparation, tag that commit with the matching version, for example `git tag v1.20.0` followed by `git push origin v1.20.0`.
 
 The Release workflow checks the tag against the version and release notes, validates the extension, retains the tested VSIX for 30 days, and publishes that exact artifact independently to both registries. It uses the existing `VSCE_TOKEN` and `OPEN_VSX_TOKEN` secrets. A push to `main` validates changes without bumping versions or publishing.
 

@@ -14,7 +14,7 @@ const url = `https://raw.githubusercontent.com/aws/serverless-application-model/
 const text = await (await get(url)).text();
 const schema = JSON.parse(text);
 const definitions = schema.definitions;
-// Some upstream PassThroughProp entries omit both a type and documentation.
+// Explicit hints cover missing upstream types and documented schema mismatches.
 const overrides = JSON.parse(await readFile('data/schema-overrides.json', 'utf8'));
 
 function resolve(node) {
@@ -36,9 +36,9 @@ function property(node, required, override) {
   const primitive = documented.match(/\b(Boolean|Integer|Number|String|List|Map|JSON)\b/)?.[1];
   const types = { Boolean: 'boolean', Integer: 'integer', Number: 'number', String: 'string', List: 'array', Map: 'object', JSON: 'object' };
   const linkedObject = /^\[[^\]]+\]\(https:\/\/docs\.aws\.amazon\.com\/AWSCloudFormation\/latest\/UserGuide\/(?:aws-properties-[^)]+|aws-resource-[^)]+#cfn-[^)]+)\)/.test(documented);
-  const type = resolved.type || types[primitive] || (linkedObject ? 'object' : override);
+  const type = override || resolved.type || types[primitive] || (linkedObject ? 'object' : undefined);
   assert.ok(['boolean', 'integer', 'number', 'string', 'array', 'object'].includes(type), `Unknown property shape: ${JSON.stringify(node)}`);
-  const result = { type, required };
+  const result = { type, required: required || /\*Required\*:\s*Yes\b/.test(node.markdownDescription || '') };
   if (resolved.enum?.every(value => typeof value === 'string')) result.choices = resolved.enum;
   return result;
 }

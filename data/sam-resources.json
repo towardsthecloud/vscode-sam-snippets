@@ -105,7 +105,7 @@
           "required": false
         },
         "OpenApiVersion": {
-          "type": "number",
+          "type": "string",
           "required": false
         },
         "Policy": {
@@ -448,7 +448,7 @@
         },
         "DataSources": {
           "type": "object",
-          "required": false
+          "required": true
         },
         "DomainName": {
           "type": "object",
@@ -456,7 +456,7 @@
         },
         "Functions": {
           "type": "object",
-          "required": false
+          "required": true
         },
         "IntrospectionConfig": {
           "type": "string",
@@ -484,7 +484,7 @@
         },
         "Resolvers": {
           "type": "object",
-          "required": false
+          "required": true
         },
         "SchemaInline": {
           "type": "string",

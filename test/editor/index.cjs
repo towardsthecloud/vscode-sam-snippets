@@ -56,10 +56,13 @@ exports.run = async function () {
     assert.equal(typeof props.Source.Id, 'string');
     assert.equal(typeof props.Destination.Id, 'string');
   });
-  await check('GraphQL inserts structured properties', async () => {
-    const props = Object.values(parse(await render('AWS::Serverless::GraphQLApi')))[0].Properties;
+  await check('GraphQL inserts structured properties with required annotations', async () => {
+    const text = await render('AWS::Serverless::GraphQLApi');
+    const props = Object.values(parse(text))[0].Properties;
+    const yaml = YAML.parseDocument(text);
     for (const key of ['Auth', 'DataSources', 'Functions', 'Resolvers']) {
       assert.ok(props[key] && typeof props[key] === 'object' && !Array.isArray(props[key]), `${key} must be a mapping`);
+      assert.equal(yaml.getIn(['LogicalID', 'Properties', key], true).comment?.trim(), 'Required', `${key} must be annotated as required`);
     }
   });
   await check('And inserts two editable condition references', async () => {
@@ -93,16 +96,20 @@ exports.run = async function () {
     await nextPlaceholder();
     assert.equal(document.getText(editor.selection), 'src/');
   });
-  await check('Replacing a string placeholder with false keeps its YAML string type', async () => {
-    const text = await render('AWS::Serverless::Function');
-    const target = text.split('\n').findIndex(line => line.trim().startsWith('Description:'));
-    await vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup');
-    for (let index = 0; index < 50 && editor.selection.active.line < target; index++) await nextPlaceholder();
-    assert.equal(editor.selection.active.line, target);
-    assert.equal(document.getText(editor.selection), 'String', 'String quotes must remain outside the editable placeholder');
-    await editor.edit(edit => edit.replace(editor.selection, 'false'));
-    assert.equal(parse(document.getText()).LogicalID.Properties.Description, 'false');
-  });
+  for (const [resource, property, replacement] of [
+    ['Function', 'Description', 'false'], ['Api', 'OpenApiVersion', '2.0'],
+  ]) {
+    await check(`Editing ${resource}.${property} preserves its YAML string type`, async () => {
+      const text = await render('AWS::Serverless::' + resource);
+      const target = text.split('\n').findIndex(line => line.trim().startsWith(property + ':'));
+      assert.ok(target >= 0, `Missing ${property} placeholder`);
+      await vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup');
+      for (let index = 0; index < 50 && editor.selection.active.line < target; index++) await nextPlaceholder();
+      assert.equal(editor.selection.active.line, target);
+      await editor.edit(edit => edit.replace(editor.selection, replacement));
+      assert.equal(parse(document.getText()).LogicalID.Properties[property], replacement);
+    });
+  }
   await check('Every contributed snippet inserts at two and four space indentation', async () => {
     for (const name of Object.keys(schema)) assert.ok(catalog[name], `Missing SAM resource: ${name}`);
     for (const name of Object.keys(catalog)) {

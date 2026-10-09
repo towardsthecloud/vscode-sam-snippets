@@ -1,4 +1,7 @@
 {
+  "AWS::Serverless::Api": {
+    "OpenApiVersion": "string"
+  },
   "AWS::Serverless::GraphQLApi": {
     "IntrospectionConfig": "string",
     "OwnerContact": "string",

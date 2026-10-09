@@ -30,7 +30,8 @@
     "yml"
   ],
   "scripts": {
-    "test": "npm run generate:check && npm run package && npm run test:package && npm run test:editor && npm run test:templates",
+    "test": "npm run generate:check && npm run test:release && npm run package && npm run test:package && npm run test:editor && npm run test:templates",
+    "test:release": "node --test test/release.test.mjs",
     "test:editor": "node scripts/test-editor.mjs",
     "generate": "node scripts/generate.mjs",
     "generate:check": "node scripts/generate.mjs --check",
