@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.20.0] - Unreleased
+## [1.20.0] - 2026-10-09
 
 - Fix Connector and GraphQL YAML shapes and condition operands.
 - Add all 13 current SAM resource types and generate property scaffolds from a pinned SAM schema.
