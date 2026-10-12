@@ -1,2 +1,2 @@
 aws-sam-cli==1.167.0
-cfn-lint==1.53.3
+cfn-lint==1.57.2
