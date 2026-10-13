@@ -27,6 +27,7 @@ jobs:
         run: xvfb-run -a npm test
       - name: Retain the tested VSIX
         uses: actions/upload-artifact@v7.0.2
+        continue-on-error: true
         with:
           name: sam-snippets-vsix
           path: .test-artifacts/sam-snippets.vsix
