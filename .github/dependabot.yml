@@ -11,6 +11,9 @@ updates:
     directory: /
     schedule:
       interval: monthly
+    groups:
+      sam-validation-tooling:
+        patterns: ['*']
   - package-ecosystem: github-actions
     directory: /
     schedule:
