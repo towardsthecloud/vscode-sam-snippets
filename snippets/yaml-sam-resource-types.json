@@ -397,11 +397,12 @@
       "${1:LogicalID}:",
       "\tType: AWS::Serverless::NetworkConnector",
       "\tProperties:",
-      "\t\tName: \"${2:String}\"",
-      "\t\tOperatorRole: \"${3:String}\"",
-      "\t\tPropagateTags: ${4:false}",
-      "\t\tTags: ${5:{\\}}",
-      "\t\tVpcConfig: ${6:{\\}} # Required",
+      "\t\tComputeTypes: ${2:[]}",
+      "\t\tName: \"${3:String}\"",
+      "\t\tOperatorRole: \"${4:String}\"",
+      "\t\tPropagateTags: ${5:false}",
+      "\t\tTags: ${6:{\\}}",
+      "\t\tVpcConfig: ${7:{\\}} # Required",
       "$0"
     ],
     "description": "Full AWS::Serverless::NetworkConnector property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-networkconnector.html",
@@ -456,6 +457,43 @@
       "$0"
     ],
     "description": "Full AWS::Serverless::StateMachine property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-statemachine.html",
+    "scope": "yaml"
+  },
+  "AWS::Serverless::WebFunction": {
+    "prefix": [
+      "serverless-webfunction",
+      "serverless-webfunction-full"
+    ],
+    "body": [
+      "${1:LogicalID}:",
+      "\tType: AWS::Serverless::WebFunction",
+      "\tProperties:",
+      "\t\tAuthType: \"${2:String}\" # Required",
+      "\t\tAutoDeploymentMode: \"${3:String}\"",
+      "\t\tCodeUri: \"${4:String}\" # Required",
+      "\t\tEgressNetworkConnectorArn: \"${5:String}\"",
+      "\t\tEndpointDescription: \"${6:String}\"",
+      "\t\tEndpointName: \"${7:String}\"",
+      "\t\tEndpointType: \"${8:String}\"",
+      "\t\tEntryPoint: \"${9:String}\"",
+      "\t\tEnvironmentVariables: ${10:{\\}}",
+      "\t\tExecutionRoleArn: \"${11:String}\"",
+      "\t\tFunctionName: \"${12:String}\"",
+      "\t\tInlineCode: \"${13:String}\"",
+      "\t\tKmsKeyArn: \"${14:String}\"",
+      "\t\tLoggingConfig: ${15:{\\}}",
+      "\t\tMaxConcurrencyPerEnvironment: ${16:0}",
+      "\t\tReplicaRegions: ${17:[]}",
+      "\t\tRevisionDescription: \"${18:String}\"",
+      "\t\tRevisionWeights: ${19:{\\}}",
+      "\t\tRuntime: \"${20:String}\" # Required",
+      "\t\tScalingConfig: ${21:{\\}}",
+      "\t\tTags: ${22:{\\}}",
+      "\t\tThrottleConfig: ${23:{\\}}",
+      "\t\tTimeout: ${24:0}",
+      "$0"
+    ],
+    "description": "Full AWS::Serverless::WebFunction property scaffold. Remove unused properties and replace placeholders before deployment.\nhttps://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-webfunction.html",
     "scope": "yaml"
   },
   "AWS::Serverless::WebSocketApi": {

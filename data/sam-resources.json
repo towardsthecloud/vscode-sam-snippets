@@ -1,8 +1,8 @@
 {
   "source": {
-    "commit": "49bac2e98b0a67bd96e2c83841bb02afda699255",
-    "url": "https://raw.githubusercontent.com/aws/serverless-application-model/49bac2e98b0a67bd96e2c83841bb02afda699255/samtranslator/schema/schema.json",
-    "sha256": "f99ac99a4b4106b96ae2f30f59f5c63b795bd1416b953e2e8865e75d376e6401"
+    "commit": "1df8469d7130669b8697814a53e99776a4c2057c",
+    "url": "https://raw.githubusercontent.com/aws/serverless-application-model/1df8469d7130669b8697814a53e99776a4c2057c/samtranslator/schema/schema.json",
+    "sha256": "af8f6bfd0e973d656f2036e469892a9cd508217fed836510d6b4ba76e7446268"
   },
   "resources": {
     "AWS::Serverless::Api": {
@@ -682,6 +682,10 @@
     "AWS::Serverless::NetworkConnector": {
       "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-networkconnector.html",
       "properties": {
+        "ComputeTypes": {
+          "type": "array",
+          "required": false
+        },
         "Name": {
           "type": "string",
           "required": false
@@ -802,6 +806,103 @@
         },
         "UseAliasAsEventTarget": {
           "type": "boolean",
+          "required": false
+        }
+      }
+    },
+    "AWS::Serverless::WebFunction": {
+      "documentation": "https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-webfunction.html",
+      "properties": {
+        "AuthType": {
+          "type": "string",
+          "required": true
+        },
+        "AutoDeploymentMode": {
+          "type": "string",
+          "required": false
+        },
+        "CodeUri": {
+          "type": "string",
+          "required": true
+        },
+        "EgressNetworkConnectorArn": {
+          "type": "string",
+          "required": false
+        },
+        "EndpointDescription": {
+          "type": "string",
+          "required": false
+        },
+        "EndpointName": {
+          "type": "string",
+          "required": false
+        },
+        "EndpointType": {
+          "type": "string",
+          "required": false
+        },
+        "EntryPoint": {
+          "type": "string",
+          "required": false
+        },
+        "EnvironmentVariables": {
+          "type": "object",
+          "required": false
+        },
+        "ExecutionRoleArn": {
+          "type": "string",
+          "required": false
+        },
+        "FunctionName": {
+          "type": "string",
+          "required": false
+        },
+        "InlineCode": {
+          "type": "string",
+          "required": false
+        },
+        "KmsKeyArn": {
+          "type": "string",
+          "required": false
+        },
+        "LoggingConfig": {
+          "type": "object",
+          "required": false
+        },
+        "MaxConcurrencyPerEnvironment": {
+          "type": "integer",
+          "required": false
+        },
+        "ReplicaRegions": {
+          "type": "array",
+          "required": false
+        },
+        "RevisionDescription": {
+          "type": "string",
+          "required": false
+        },
+        "RevisionWeights": {
+          "type": "object",
+          "required": false
+        },
+        "Runtime": {
+          "type": "string",
+          "required": true
+        },
+        "ScalingConfig": {
+          "type": "object",
+          "required": false
+        },
+        "Tags": {
+          "type": "object",
+          "required": false
+        },
+        "ThrottleConfig": {
+          "type": "object",
+          "required": false
+        },
+        "Timeout": {
+          "type": "integer",
           "required": false
         }
       }
