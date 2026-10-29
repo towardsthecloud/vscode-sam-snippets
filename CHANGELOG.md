@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.20.1] - 2026-10-29
+
+- Publish releases with GitHub Trusted Publishing.
+
 ## [1.20.0] - 2026-10-09
 
 - Fix Connector and GraphQL YAML shapes and condition operands.
