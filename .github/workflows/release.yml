@@ -22,6 +22,9 @@ jobs:
     needs: version
     uses: ./.github/workflows/validate.yml
   publish:
+    permissions:
+      contents: read
+      id-token: write
     needs: validate
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -42,9 +45,7 @@ jobs:
           path: .test-artifacts
       - name: Publish the tested VSIX to Visual Studio Marketplace
         if: matrix.registry == 'marketplace'
-        run: npm exec -- vsce publish --packagePath .test-artifacts/sam-snippets.vsix --skip-duplicate
-        env:
-          VSCE_PAT: ${{ secrets.VSCE_TOKEN }}
+        run: npx --yes @vscode/vsce@4.1.0 publish --oidc --packagePath .test-artifacts/sam-snippets.vsix --skip-duplicate
       - name: Publish the tested VSIX to Open VSX
         if: matrix.registry == 'open-vsx'
         run: npm exec -- ovsx publish .test-artifacts/sam-snippets.vsix --skip-duplicate
